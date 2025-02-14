@@ -1,22 +1,21 @@
 package org.example;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Consultant {
-    private int id;
+    private Long id;
     private String firstName;
     private String lastName;
-    private double salary;
+    private Double salary;
     private String industry;
     private Manager manager;
-    private List<Project> projects = new ArrayList<>();
+    private List<Project> projects;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -40,7 +39,7 @@ public class Consultant {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(Double salary) {
         this.salary = salary;
     }
 
@@ -68,8 +67,4 @@ public class Consultant {
         this.projects = projects;
     }
 
-    public void addProject(Project project) {
-        this.projects.add(project);
-        project.getConsultants().add(this);
-    }
 }

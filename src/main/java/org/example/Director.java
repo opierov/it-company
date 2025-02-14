@@ -1,19 +1,19 @@
 package org.example;
 
 public class Director {
-    private int id;
+    private Long id;
     private String firstName;
     private String lastName;
-    private double salary;
+    private Double salary;
     private String region;
 
     private Department department;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -37,7 +37,7 @@ public class Director {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(Double salary) {
         this.salary = salary;
     }
 

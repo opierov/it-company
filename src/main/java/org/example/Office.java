@@ -1,20 +1,15 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Office {
-    private int id;
+    private Long id;
     private String location;
-    private int capacity;
+    private Integer capacity;
 
-    private List<Company> companies = new ArrayList<>();
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -30,15 +25,8 @@ public class Office {
         return capacity;
     }
 
-    public void setCapacity(int capacity) {
+    public void setCapacity(Integer capacity) {
         this.capacity = capacity;
     }
 
-    public List<Company> getCompanies() {
-        return companies;
-    }
-
-    public void setCompanies(List<Company> companies) {
-        this.companies = companies;
-    }
 }

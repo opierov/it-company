@@ -1,22 +1,19 @@
 package org.example;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Project {
-    private int id;
+    private Long id;
     private String name;
     private String deadline;
-    private double budget;
+    private Double budget;
     private String technology;
-    private List<Employee> employees = new ArrayList<>();
-    private List<Consultant> consultants = new ArrayList<>();
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -40,7 +37,7 @@ public class Project {
         return budget;
     }
 
-    public void setBudget(double budget) {
+    public void setBudget(Double budget) {
         this.budget = budget;
     }
 
@@ -52,29 +49,4 @@ public class Project {
         this.technology = technology;
     }
 
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
-
-    public void addEmployee(Employee employee) {
-        this.employees.add(employee);
-        employee.getProjects().add(this);
-    }
-
-    public List<Consultant> getConsultants() {
-        return consultants;
-    }
-
-    public void setConsultants(List<Consultant> consultants) {
-        this.consultants = consultants;
-    }
-
-    public void addConsultant(Consultant consultant) {
-        this.consultants.add(consultant);
-        consultant.getProjects().add(this);
-    }
 }
