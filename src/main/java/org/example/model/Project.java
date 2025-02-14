@@ -1,6 +1,4 @@
-package org.example;
-
-import java.util.List;
+package org.example.model;
 
 public class Project {
     private Long id;
