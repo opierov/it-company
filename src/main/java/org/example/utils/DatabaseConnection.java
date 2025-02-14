@@ -1,4 +1,4 @@
-package org.example;
+package org.example.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,7 +21,7 @@ public class DatabaseConnection {
             }
 
             Class.forName(properties.getProperty("db.driver"));
-            
+
             connection = DriverManager.getConnection(
                     properties.getProperty("db.url"),
                     properties.getProperty("db.username"),

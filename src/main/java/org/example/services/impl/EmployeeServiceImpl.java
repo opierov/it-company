@@ -1,7 +1,8 @@
-package org.example.service;
+package org.example.services.impl;
 
-import org.example.model.Employee;
+import org.example.models.Employee;
 import org.example.dao.EmployeeDAO;
+import org.example.services.EmployeeService;
 
 import java.util.List;
 
@@ -23,11 +24,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee getById(int id) {
-        return null;
-    }
-
-    @Override
     public List<Employee> getAll() {
         return employeeDAO.findAll();
     }
@@ -35,11 +31,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void update(Employee employee) {
         employeeDAO.update(employee);
-    }
-
-    @Override
-    public void delete(int id) {
-
     }
 
     @Override

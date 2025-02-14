@@ -1,11 +1,11 @@
-package org.example.service;
+package org.example.services;
 
 import java.util.List;
 
 public interface Service<T> {
     void add(T entity);
-    T getById(int id);
+    T getById(Long id);
     List<T> getAll();
     void update(T entity);
-    void delete(int id);
+    void delete(Long id);
 }

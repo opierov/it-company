@@ -1,7 +1,7 @@
-package org.example.service;
+package org.example.services;
 
-import org.example.dao.*;
-import org.example.model.Employee;
+import org.example.dao.impl.EmployeeDAOImpl;
+import org.example.models.Employee;
 
 import java.util.List;
 

@@ -1,13 +1,15 @@
-package org.example.model;
+package org.example.models;
 
-public class Director {
+import java.util.List;
+
+public class Employee {
     private Long id;
     private String firstName;
     private String lastName;
+    private String role;
     private Double salary;
-    private String region;
-
-    private Department department;
+    private String skills;
+    private List<Project> projects;
 
     public Long getId() {
         return id;
@@ -33,6 +35,14 @@ public class Director {
         this.lastName = lastName;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public double getSalary() {
         return salary;
     }
@@ -41,19 +51,20 @@ public class Director {
         this.salary = salary;
     }
 
-    public String getRegion() {
-        return region;
+    public String getSkills() {
+        return skills;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
+    public void setSkills(String skills) {
+        this.skills = skills;
     }
 
-    public Department getDepartment() {
-        return department;
+    public List<Project> getProjects() {
+        return projects;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
+
 }

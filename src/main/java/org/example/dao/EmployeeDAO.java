@@ -1,6 +1,6 @@
 package org.example.dao;
 
-import org.example.model.Employee;
+import org.example.models.Employee;
 
 import java.util.List;
 import java.util.Optional;

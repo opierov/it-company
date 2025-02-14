@@ -1,7 +1,7 @@
 package org.example;
 
-import org.example.dao.EmployeeDAOImpl;
-import org.example.service.ServiceLayer;
+import org.example.dao.impl.EmployeeDAOImpl;
+import org.example.services.ServiceLayer;
 
 public class Main {
     public static void main(String[] args) {

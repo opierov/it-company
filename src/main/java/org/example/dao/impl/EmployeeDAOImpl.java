@@ -1,12 +1,14 @@
-package org.example.dao;
+package org.example.dao.impl;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import org.example.model.Employee;
 
-import static org.example.DatabaseConnection.connection;
+import org.example.dao.EmployeeDAO;
+import org.example.models.Employee;
+
+import static org.example.utils.DatabaseConnection.connection;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
 

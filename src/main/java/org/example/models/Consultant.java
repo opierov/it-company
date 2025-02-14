@@ -1,14 +1,14 @@
-package org.example.model;
+package org.example.models;
 
 import java.util.List;
 
-public class Employee {
+public class Consultant {
     private Long id;
     private String firstName;
     private String lastName;
-    private String role;
     private Double salary;
-    private String skills;
+    private String industry;
+    private Manager manager;
     private List<Project> projects;
 
     public Long getId() {
@@ -35,14 +35,6 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public double getSalary() {
         return salary;
     }
@@ -51,12 +43,20 @@ public class Employee {
         this.salary = salary;
     }
 
-    public String getSkills() {
-        return skills;
+    public String getIndustry() {
+        return industry;
     }
 
-    public void setSkills(String skills) {
-        this.skills = skills;
+    public void setIndustry(String industry) {
+        this.industry = industry;
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
     }
 
     public List<Project> getProjects() {
