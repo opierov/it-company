@@ -6,7 +6,6 @@ public class Department {
     private Long id;
     private String name;
     private String specialization;
-
     private Director director;
     private List<Team> teams;
 
@@ -49,4 +48,5 @@ public class Department {
     public void setTeams(List<Team> teams) {
         this.teams = teams;
     }
+
 }

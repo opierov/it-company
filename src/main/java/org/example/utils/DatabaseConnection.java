@@ -8,31 +8,39 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class DatabaseConnection {
-    public static Connection connection;
+    private static DatabaseConnection instance;
+    private final Connection connection;
 
-    static {
-        try {
+    private DatabaseConnection() {
+        try (InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties")) {
             Properties properties = new Properties();
-            try (InputStream input = DatabaseConnection.class.getClassLoader().getResourceAsStream("config.properties")) {
-                if (input == null) {
-                    throw new RuntimeException("Unable to find config.properties");
-                }
-                properties.load(input);
+            if (input == null) {
+                throw new IOException("Unable to find config.properties");
             }
+            properties.load(input);
 
-            Class.forName(properties.getProperty("db.driver"));
+            String url = properties.getProperty("db.url");
+            String user = properties.getProperty("db.user");
+            String password = properties.getProperty("db.password");
 
-            connection = DriverManager.getConnection(
-                    properties.getProperty("db.url"),
-                    properties.getProperty("db.username"),
-                    properties.getProperty("db.password")
-            );
-        } catch (IOException | ClassNotFoundException | SQLException e) {
-            throw new RuntimeException("Database connection failed", e);
+            this.connection = DriverManager.getConnection(url, user, password);
+        } catch (IOException | SQLException e) {
+            throw new RuntimeException("Error connecting to the database", e);
         }
     }
 
-    public static Connection getConnection() {
+    public static DatabaseConnection getInstance() {
+        if (instance == null) {
+            synchronized (DatabaseConnection.class) {
+                if (instance == null) {
+                    instance = new DatabaseConnection();
+                }
+            }
+        }
+        return instance;
+    }
+
+    public Connection getConnection() {
         return connection;
     }
 }

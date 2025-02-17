@@ -47,4 +47,10 @@ public class Project {
         this.technology = technology;
     }
 
+    public void setClient(Client client) {
+    }
+
+    public void setManager(Manager manager) {
+    }
+
 }

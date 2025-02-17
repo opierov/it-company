@@ -9,4 +9,5 @@ public interface BaseDAO<T> {
     List<T> getAll();
     void update(T entity);
     void delete(Long id);
+
 }

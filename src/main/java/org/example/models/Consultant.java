@@ -11,6 +11,15 @@ public class Consultant {
     private Manager manager;
     private List<Project> projects;
 
+    public Consultant(Long id, String firstName, String lastName, Double salary, String industry, Manager manager) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.salary = salary;
+        this.industry = industry;
+        this.manager = manager;
+    }
+
     public Long getId() {
         return id;
     }
@@ -65,6 +74,10 @@ public class Consultant {
 
     public void setProjects(List<Project> projects) {
         this.projects = projects;
+    }
+
+    public long getManagerId() {
+        return manager != null ? manager.getId() : 0;
     }
 
 }

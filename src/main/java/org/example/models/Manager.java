@@ -13,6 +13,14 @@ public class Manager {
     private List<Consultant> consultants;
     private List<Employee> employees;
 
+    public Manager(long managerId, String managerName) {
+
+    }
+
+    public Manager() {
+
+    }
+
     public Long getId() {
         return id;
     }
@@ -76,4 +84,9 @@ public class Manager {
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
+
+    public void setName(String string) {
+
+    }
+
 }

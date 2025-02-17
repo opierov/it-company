@@ -5,9 +5,7 @@ public class Company {
     private String name;
     private Integer staff;
     private Double revenue;
-
     private Office office;
-    private Department department;
 
     public Long getId() {
         return id;

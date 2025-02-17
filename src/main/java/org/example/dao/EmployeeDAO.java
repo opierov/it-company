@@ -1,18 +1,17 @@
 package org.example.dao;
 
 import org.example.models.Employee;
-
 import java.util.List;
-import java.util.Optional;
 
 public interface EmployeeDAO extends BaseDAO<Employee> {
-    Optional<Employee> getById(Long id);
 
     List<Employee> getByDepartmentId(Long departmentId);
 
-    Employee findById(Long id);
+    List<Employee> getByRole(String role);
+    List<Employee> getBySalaryRange(Double minSalary, Double maxSalary);
+    List<Employee> getBySkill(String skill);
 
-    List<Employee> findByDepartment(Long departmentId);
+    void updateSkills(Long id, String skills);
 
-    List<Employee> findAll();
+    void deleteBySalaryRange(Double minSalary, Double maxSalary);
 }

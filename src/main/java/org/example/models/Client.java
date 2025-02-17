@@ -3,7 +3,6 @@ package org.example.models;
 import java.util.List;
 
 public class Client {
-
     private Long id;
     private String name;
     private String contactInfo;
@@ -56,7 +55,14 @@ public class Client {
     }
 
     public void setProjects(List<Project> projects) {
-        this.projects = projects;
+
+    }
+
+    public Manager getProject() {
+        return null;
+    }
+
+    public void setProject(Project project) {
     }
 
 }
