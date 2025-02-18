@@ -1,0 +1,93 @@
+<!-- XSD Schema for Validation -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="Company">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Employees" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Employee" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="id" type="xs:long" />
+                                        <xs:element name="firstName" type="xs:string" />
+                                        <xs:element name="lastName" type="xs:string" />
+                                        <xs:element name="role" type="xs:string" />
+                                        <xs:element name="salary" type="xs:double" />
+                                        <xs:element name="skills" type="xs:string" />
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Clients" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Client" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="id" type="xs:long" />
+                                        <xs:element name="name" type="xs:string" />
+                                        <xs:element name="contactInfo" type="xs:string" />
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Projects" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Project" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="id" type="xs:long" />
+                                        <xs:element name="name" type="xs:string" />
+                                        <xs:element name="deadline" type="xs:date" />
+                                        <xs:element name="technology" type="xs:string" />
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Consultants" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Consultant" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="id" type="xs:long" />
+                                        <xs:element name="firstName" type="xs:string" />
+                                        <xs:element name="lastName" type="xs:string" />
+                                        <xs:element name="salary" type="xs:double" />
+                                        <xs:element name="industry" type="xs:string" />
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Managers" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Manager" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="id" type="xs:long" />
+                                        <xs:element name="firstName" type="xs:string" />
+                                        <xs:element name="lastName" type="xs:string" />
+                                        <xs:element name="salary" type="xs:double" />
+                                        <xs:element name="industry" type="xs:string" />
+                                        <xs:element name="skills" type="xs:string" />
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
