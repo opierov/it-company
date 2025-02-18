@@ -1,3 +1,4 @@
+/*
 package org.example.services.impl;
 
 import org.example.dao.ClientDAO;
@@ -70,4 +71,4 @@ public class ClientServiceImpl implements ClientService {
     public void deleteClientByContactInfo(String contactInfo) {
         clientDAO.deleteByContactInfo(contactInfo);
     }
-}
+}*/

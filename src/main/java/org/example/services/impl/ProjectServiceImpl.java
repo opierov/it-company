@@ -1,3 +1,4 @@
+/*
 package org.example.services.impl;
 
 import org.example.dao.ProjectDAO;
@@ -81,3 +82,4 @@ public class ProjectServiceImpl implements ProjectService {
         projectDAO.deleteByTechnology(technology);
     }
 }
+*/

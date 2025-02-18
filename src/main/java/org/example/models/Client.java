@@ -1,58 +1,62 @@
 package org.example.models;
 
-import jakarta.xml.bind.annotation.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-@XmlRootElement(name = "Client")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Client {
+    @JsonProperty("id")
+    private int id;
 
-    @XmlElement
-    private Long id;
-
-    @XmlElement
+    @JsonProperty("name")
     private String name;
 
-    @XmlElement
+    @JsonProperty("contactInfo")
     private String contactInfo;
 
-    @XmlElement
-    private String firstName;
-
-    @XmlElement
-    private String lastName;
-
-    @XmlElementWrapper(name = "projects")
-    @XmlElement(name = "Project")
+    @JsonProperty("projects")
     private List<Project> projects;
 
-    public Client() {}
+    // Getters and Setters
+    public int getId() {
+        return id;
+    }
 
-    public Client(Long id, String name, String contactInfo, String firstName, String lastName, List<Project> projects) {
+    public void setId(int id) {
         this.id = id;
-        this.name = name;
-        this.contactInfo = contactInfo;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
         this.projects = projects;
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public String getContactInfo() {
+        return contactInfo;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public void setContactInfo(String contactInfo) {
+        this.contactInfo = contactInfo;
+    }
 
-    public String getContactInfo() { return contactInfo; }
-    public void setContactInfo(String contactInfo) { this.contactInfo = contactInfo; }
+    public String getName() {
+        return name;
+    }
 
-    public String getFirstName() { return firstName; }
-    public void setFirstName(String firstName) { this.firstName = firstName; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public String getLastName() { return lastName; }
-    public void setLastName(String lastName) { this.lastName = lastName; }
-
-    public List<Project> getProjects() { return projects; }
-    public void setProjects(List<Project> projects) { this.projects = projects; }
-
+    // toString() method
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", contactInfo='" + contactInfo + '\'' +
+                ", projects=" + projects +
+                '}';
+    }
 }

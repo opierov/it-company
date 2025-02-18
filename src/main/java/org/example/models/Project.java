@@ -1,83 +1,42 @@
 package org.example.models;
 
-import jakarta.xml.bind.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
+import java.util.List;
 
-@XmlRootElement(name = "Project")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Project {
+    @JsonProperty("id")
+    private int id;
 
-    @XmlElement
-    private Long id;
-
-    @XmlElement
+    @JsonProperty("name")
     private String name;
 
-    @XmlElement
-    private String deadline;
+    @JsonProperty("deadline")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Date deadline;
 
-    @XmlElement
-    private Double budget;
-
-    @XmlElement
-    private String technology;
-
-    @XmlElement
+    @JsonProperty("client")
     private Client client;
 
-    @XmlElement
-    private Manager manager;
+    @JsonProperty("tasks")
+    private List<String> tasks;
 
-    public Project() {}
-
-    public Project(Long id, String name, String deadline, Double budget, String technology, Client client, Manager manager) {
-        this.id = id;
-        this.name = name;
-        this.deadline = deadline;
-        this.budget = budget;
-        this.technology = technology;
-        this.client = client;
-        this.manager = manager;
-    }
-
-    public Long getId() {
+    // Getters and Setters
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public List<String> getTasks() {
+        return tasks;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(String deadline) {
-        this.deadline = deadline;
-    }
-
-    public Double getBudget() {
-        return budget;
-    }
-
-    public void setBudget(Double budget) {
-        this.budget = budget;
-    }
-
-    public String getTechnology() {
-        return technology;
-    }
-
-    public void setTechnology(String technology) {
-        this.technology = technology;
+    public void setTasks(List<String> tasks) {
+        this.tasks = tasks;
     }
 
     public Client getClient() {
@@ -88,12 +47,31 @@ public class Project {
         this.client = client;
     }
 
-    public Manager getManager() {
-        return manager;
+    public Date getDeadline() {
+        return deadline;
     }
 
-    public void setManager(Manager manager) {
-        this.manager = manager;
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    // toString() method
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", deadline=" + deadline +
+                ", client=" + client +
+                ", tasks=" + tasks +
+                '}';
+    }
 }

@@ -1,0 +1,79 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "role": "Software Engineer",
+      "salary": 85000.5,
+      "skills": [
+        "Java",
+        "Spring Boot"
+      ],
+      "projects": [
+        {
+          "id": 201,
+          "name": "AI Research",
+          "deadline": "2025-12-31",
+          "client": {
+            "id": 101,
+            "name": "Tech Corp",
+            "contactInfo": "client@techcorp.com"
+          }
+        }
+      ]
+    }
+  ],
+  "clients": [
+    {
+      "id": 101,
+      "name": "Tech Corp",
+      "contactInfo": "client@techcorp.com",
+      "projects": [
+        {
+          "id": 201,
+          "name": "AI Research",
+          "deadline": "2025-12-31"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": 201,
+      "name": "AI Research",
+      "deadline": "2025-12-31",
+      "client": {
+        "id": 101,
+        "name": "Tech Corp",
+        "contactInfo": "client@techcorp.com"
+      }
+    }
+  ],
+  "consultants": [
+    {
+      "id": 301,
+      "name": "Alice Smith",
+      "industry": "Finance"
+    }
+  ],
+  "managers": [
+    {
+      "id": 401,
+      "name": "Bob Brown",
+      "salary": 120000.0,
+      "department": "IT",
+      "employees": [
+        {
+          "id": 1,
+          "name": "John Doe",
+          "role": "Software Engineer",
+          "salary": 85000.5,
+          "skills": [
+            "Java",
+            "Spring Boot"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -7,9 +7,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 
-public class XMLParser {
+public class DOMParser {
 
-    private static final Logger logger = LogManager.getLogger(XMLParser.class);
+    private static final Logger logger = LogManager.getLogger(DOMParser.class);
 
     public static void main(String[] args) {
         try {

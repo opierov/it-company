@@ -1,86 +1,74 @@
 package org.example.models;
 
-import jakarta.xml.bind.annotation.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 
-@XmlRootElement(name = "Manager")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Manager {
+    @JsonProperty("id")
+    private int id;
 
-    @XmlElement
-    private Long id;
+    @JsonProperty("name")
+    private String name;
 
-    @XmlElement
-    private String firstName;
+    @JsonProperty("salary")
+    private double salary;
 
-    @XmlElement
-    private String lastName;
+    @JsonProperty("department")
+    private String department;
 
-    @XmlElement
-    private Double salary;
+    @JsonProperty("employees")
+    private List<Employee> employees;
 
-    @XmlElement
-    private String industry;
-
-    @XmlElement
-    private String skills;
-
-    public Manager() {}
-
-    public Manager(Long id, String firstName, String lastName, Double salary, String industry, String skills) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.salary = salary;
-        this.industry = industry;
-        this.skills = skills;
-    }
-
-    public Long getId() {
+    // Getters and Setters
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public List<Employee> getEmployees() {
+        return employees;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
-    public Double getSalary() {
+    public double getSalary() {
         return salary;
     }
 
-    public void setSalary(Double salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 
-    public String getIndustry() {
-        return industry;
+    public String getName() {
+        return name;
     }
 
-    public void setIndustry(String industry) {
-        this.industry = industry;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getSkills() {
-        return skills;
+    // toString() method
+    @Override
+    public String toString() {
+        return "Manager{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", salary=" + salary +
+                ", department='" + department + '\'' +
+                ", employees=" + employees +
+                '}';
     }
-
-    public void setSkills(String skills) {
-        this.skills = skills;
-    }
-
 }

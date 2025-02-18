@@ -1,3 +1,4 @@
+/*
 package org.example;
 
 import org.apache.logging.log4j.LogManager;
@@ -193,4 +194,4 @@ public class Main {
 
     }
 
-}
+}*/
