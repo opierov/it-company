@@ -1,3 +1,4 @@
+/*
 package org.example.services.impl;
 
 import org.example.dao.EmployeeDAO;
@@ -70,4 +71,4 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void deleteEmployeesBySalaryRange(Double minSalary, Double maxSalary) {
         employeeDAO.deleteBySalaryRange(minSalary, maxSalary);
     }
-}
+}*/

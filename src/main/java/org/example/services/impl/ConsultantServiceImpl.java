@@ -1,3 +1,4 @@
+/*
 package org.example.services.impl;
 
 import org.example.dao.ConsultantDAO;
@@ -75,4 +76,4 @@ public class ConsultantServiceImpl implements ConsultantService {
     public void removeConsultantsByManagerId(Long managerId) {
         consultantDAO.deleteByManagerId(managerId);
     }
-}
+}*/

@@ -1,6 +1,6 @@
 package org.example;
 
-import jakarta.xml.bind.JAXBContext;
+/*import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
@@ -8,11 +8,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.models.Client;
 
-import java.io.File;
+import java.io.File;*/
 
 public class JAXBParser {
 
-    private static final Logger logger = LogManager.getLogger(JAXBParser.class);
+/*    private static final Logger logger = LogManager.getLogger(JAXBParser.class);
 
     public static void main(String[] args) {
         try {
@@ -31,5 +31,5 @@ public class JAXBParser {
         } catch (JAXBException e) {
             logger.error("Error during JAXB parsing: ", e);
         }
-    }
+    }*/
 }

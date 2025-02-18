@@ -1,3 +1,4 @@
+/*
 package org.example.dao.impl;
 
 import org.apache.logging.log4j.LogManager;
@@ -224,3 +225,4 @@ public class ClientDAOImpl implements ClientDAO {
         return client;
     }
 }
+*/

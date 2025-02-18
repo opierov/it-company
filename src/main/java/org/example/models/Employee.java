@@ -1,68 +1,42 @@
 package org.example.models;
 
-import jakarta.xml.bind.annotation.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-@XmlRootElement(name = "Employee")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Employee {
+    @JsonProperty("id")
+    private int id;
 
-    @XmlElement
-    private Long id;
+    @JsonProperty("name")
+    private String name;
 
-    @XmlElement
-    private String firstName;
-
-    @XmlElement
-    private String lastName;
-
-    @XmlElement
+    @JsonProperty("role")
     private String role;
 
-    @XmlElement
-    private Double salary;
+    @JsonProperty("salary")
+    private double salary;
 
-    @XmlElement
-    private String skills;
+    @JsonProperty("skills")
+    private List<String> skills;
 
-    @XmlElementWrapper(name = "projects")
-    @XmlElement(name = "Project")
+    @JsonProperty("projects")
     private List<Project> projects;
 
-    public Employee() {}
-
-    public Employee(Long id, String firstName, String lastName, String role, Double salary, String skills, List<Project> projects) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.role = role;
-        this.salary = salary;
-        this.skills = skills;
-        this.projects = projects;
-    }
-
-    public Long getId() {
+    // Getters and Setters
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getRole() {
@@ -73,19 +47,19 @@ public class Employee {
         this.role = role;
     }
 
-    public Double getSalary() {
+    public double getSalary() {
         return salary;
     }
 
-    public void setSalary(Double salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 
-    public String getSkills() {
+    public List<String> getSkills() {
         return skills;
     }
 
-    public void setSkills(String skills) {
+    public void setSkills(List<String> skills) {
         this.skills = skills;
     }
 
@@ -97,4 +71,16 @@ public class Employee {
         this.projects = projects;
     }
 
+    // toString() method
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", role='" + role + '\'' +
+                ", salary=" + salary +
+                ", skills=" + skills +
+                ", projects=" + projects +
+                '}';
+    }
 }

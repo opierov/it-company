@@ -1,76 +1,38 @@
 package org.example.models;
 
-import jakarta.xml.bind.annotation.*;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Date;
 
-@XmlRootElement(name = "Consultant")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Consultant {
+    @JsonProperty("id")
+    private int id;
 
-    @XmlElement
-    private Long id;
+    @JsonProperty("name")
+    private String name;
 
-    @XmlElement
-    private String firstName;
-
-    @XmlElement
-    private String lastName;
-
-    @XmlElement
-    private Double salary;
-
-    @XmlElement
+    @JsonProperty("industry")
     private String industry;
 
-    @XmlElement
-    private Manager manager;
+    @JsonProperty("hiredDate")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Date hiredDate;
 
-    @XmlElementWrapper(name = "projects")
-    @XmlElement(name = "Project")
-    private List<Project> projects;
-
-    public Consultant() {}
-
-    public Consultant(Long id, String firstName, String lastName, Double salary, String industry, Manager manager, List<Project> projects) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.salary = salary;
-        this.industry = industry;
-        this.manager = manager;
-        this.projects = projects;
-    }
-
-    public Long getId() {
+    // Getters and Setters
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Double getSalary() {
-        return salary;
-    }
-
-    public void setSalary(Double salary) {
-        this.salary = salary;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getIndustry() {
@@ -81,20 +43,22 @@ public class Consultant {
         this.industry = industry;
     }
 
-    public long getManager() {
-        return manager.getId();
+    public Date getHiredDate() {
+        return hiredDate;
     }
 
-    public void setManager(Manager manager) {
-        this.manager = manager;
+    public void setHiredDate(Date hiredDate) {
+        this.hiredDate = hiredDate;
     }
 
-    public List<Project> getProjects() {
-        return projects;
+    // toString() method
+    @Override
+    public String toString() {
+        return "Consultant{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", industry='" + industry + '\'' +
+                ", hiredDate=" + hiredDate +
+                '}';
     }
-
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
-    }
-
 }

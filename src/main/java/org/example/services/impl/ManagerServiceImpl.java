@@ -1,3 +1,4 @@
+/*
 package org.example.services.impl;
 
 import org.example.dao.ManagerDAO;
@@ -71,3 +72,4 @@ public class ManagerServiceImpl implements ManagerService {
         managerDAO.deleteByIndustry(industry);
     }
 }
+*/
