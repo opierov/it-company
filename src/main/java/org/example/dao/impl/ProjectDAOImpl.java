@@ -251,7 +251,8 @@ public class ProjectDAOImpl implements ProjectDAO {
     private Manager mapToManager(ResultSet rs) throws SQLException {
         Manager manager = new Manager();
         manager.setId((long) rs.getInt("m.id"));
-        manager.setName(rs.getString("m.name"));
+        manager.setFirstName(rs.getString("m.first_name"));
+        manager.setLastName(rs.getString("m.last_name"));
         manager.setSalary(rs.getDouble("m.salary"));
         return manager;
     }

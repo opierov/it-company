@@ -1,24 +1,38 @@
 package org.example.models;
 
-import java.util.List;
+import jakarta.xml.bind.annotation.*;
 
+@XmlRootElement(name = "Manager")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Manager {
+
+    @XmlElement
     private Long id;
+
+    @XmlElement
     private String firstName;
+
+    @XmlElement
     private String lastName;
+
+    @XmlElement
     private Double salary;
+
+    @XmlElement
     private String industry;
+
+    @XmlElement
     private String skills;
 
-    private List<Consultant> consultants;
-    private List<Employee> employees;
+    public Manager() {}
 
-    public Manager(long managerId, String managerName) {
-
-    }
-
-    public Manager() {
-
+    public Manager(Long id, String firstName, String lastName, Double salary, String industry, String skills) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.salary = salary;
+        this.industry = industry;
+        this.skills = skills;
     }
 
     public Long getId() {
@@ -45,7 +59,7 @@ public class Manager {
         this.lastName = lastName;
     }
 
-    public double getSalary() {
+    public Double getSalary() {
         return salary;
     }
 
@@ -67,26 +81,6 @@ public class Manager {
 
     public void setSkills(String skills) {
         this.skills = skills;
-    }
-
-    public List<Consultant> getConsultants() {
-        return consultants;
-    }
-
-    public void setConsultants(List<Consultant> consultants) {
-        this.consultants = consultants;
-    }
-
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
-
-    public void setName(String string) {
-
     }
 
 }
