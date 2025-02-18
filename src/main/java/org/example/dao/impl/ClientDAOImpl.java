@@ -30,7 +30,7 @@ public class ClientDAOImpl implements ClientDAO {
             stmt.setString(2, client.getContactInfo());
             stmt.setString(3, client.getFirstName());
             stmt.setString(4, client.getLastName());
-            stmt.setLong(5, client.getProject() != null ? client.getProject().getId() : null);
+            //stmt.setLong(5, client.getProject() != null ? client.getProjects().getId() : null);
             stmt.executeUpdate();
             logger.info("Client inserted successfully: {}", client.getName());
         } catch (SQLException e) {
@@ -148,7 +148,7 @@ public class ClientDAOImpl implements ClientDAO {
             stmt.setString(2, client.getContactInfo());
             stmt.setString(3, client.getFirstName());
             stmt.setString(4, client.getLastName());
-            stmt.setLong(5, client.getProject() != null ? client.getProject().getId() : null);
+            //stmt.setLong(5, client.getProject() != null ? client.getProject().getId() : null);
             stmt.setLong(6, client.getId());
 
             stmt.executeUpdate();
@@ -204,10 +204,22 @@ public class ClientDAOImpl implements ClientDAO {
         client.setFirstName(rs.getString("first_name"));
         client.setLastName(rs.getString("last_name"));
 
-        Project project = new Project();
-        project.setId(rs.getLong("projects_id"));
-        project.setName(rs.getString("project_name"));
-        client.setProject(project);
+        List<Project> projects = new ArrayList<>();
+
+        do {
+            long projectId = rs.getLong("projects_id");
+            if (projectId != 0) {
+                Project project = new Project();
+                project.setId(projectId);
+                project.setName(rs.getString("project_name"));
+                project.setDeadline(rs.getString("project_deadline"));
+                project.setBudget(rs.getDouble("project_budget"));
+                project.setTechnology(rs.getString("project_technology"));
+                projects.add(project);
+            }
+        } while (rs.next());
+
+        client.setProjects(projects);
 
         return client;
     }

@@ -5,10 +5,12 @@ import org.apache.logging.log4j.Logger;
 import org.example.dao.ConsultantDAO;
 import org.example.models.Consultant;
 import org.example.models.Manager;
+import org.example.models.Project;
 import org.example.utils.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +32,7 @@ public class ConsultantDAOImpl implements ConsultantDAO {
             stmt.setString(2, consultant.getLastName());
             stmt.setDouble(3, consultant.getSalary());
             stmt.setString(4, consultant.getIndustry());
-            stmt.setLong(5, consultant.getManagerId());
+            stmt.setLong(5, consultant.getManager());
             stmt.setLong(6, consultant.getId());
             stmt.executeUpdate();
             logger.info("Consultant inserted successfully.");
@@ -151,7 +153,7 @@ public class ConsultantDAOImpl implements ConsultantDAO {
             stmt.setString(2, consultant.getLastName());
             stmt.setDouble(3, consultant.getSalary());
             stmt.setString(4, consultant.getIndustry());
-            stmt.setLong(5, consultant.getManagerId());
+            stmt.setLong(5, consultant.getManager());
             stmt.executeUpdate();
             logger.info("Consultant updated successfully: {}", consultant.getId());
         } catch (SQLException e) {
@@ -215,16 +217,19 @@ public class ConsultantDAOImpl implements ConsultantDAO {
     }
 
     private Consultant mapToConsultant(ResultSet rs) throws SQLException {
+        long managerId = rs.getLong("manager_id"); // Fetch manager ID from the result set
+        Manager manager = (Manager) getByManagerId(managerId);  // Replace with actual manager retrieval logic
+
+        List<Project> projects = List.of(new Project()); // Replace with actual project list
+
         return new Consultant(
                 rs.getLong("id"),
                 rs.getString("first_name"),
                 rs.getString("last_name"),
                 rs.getDouble("salary"),
                 rs.getString("industry"),
-                new Manager(
-                        rs.getLong("manager_id"),
-                        rs.getString("manager_name")
-                )
+                manager, // Pass the actual Manager object
+                projects // Pass the list of projects
         );
     }
 }

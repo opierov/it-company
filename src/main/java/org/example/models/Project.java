@@ -1,11 +1,44 @@
 package org.example.models;
 
+import jakarta.xml.bind.annotation.*;
+import java.util.Date;
+
+@XmlRootElement(name = "Project")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Project {
+
+    @XmlElement
     private Long id;
+
+    @XmlElement
     private String name;
+
+    @XmlElement
     private String deadline;
+
+    @XmlElement
     private Double budget;
+
+    @XmlElement
     private String technology;
+
+    @XmlElement
+    private Client client;
+
+    @XmlElement
+    private Manager manager;
+
+    public Project() {}
+
+    public Project(Long id, String name, String deadline, Double budget, String technology, Client client, Manager manager) {
+        this.id = id;
+        this.name = name;
+        this.deadline = deadline;
+        this.budget = budget;
+        this.technology = technology;
+        this.client = client;
+        this.manager = manager;
+    }
 
     public Long getId() {
         return id;
@@ -31,7 +64,7 @@ public class Project {
         this.deadline = deadline;
     }
 
-    public double getBudget() {
+    public Double getBudget() {
         return budget;
     }
 
@@ -47,10 +80,20 @@ public class Project {
         this.technology = technology;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
     public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Manager getManager() {
+        return manager;
     }
 
     public void setManager(Manager manager) {
+        this.manager = manager;
     }
 
 }

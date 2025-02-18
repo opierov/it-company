@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Client>
+    <id>1</id>
+    <name>Acme Corp</name>
+    <contactInfo>acme@example.com</contactInfo>
+    <firstName>John</firstName>
+    <lastName>Doe</lastName>
+    <projects>
+        <Project>
+            <id>101</id>
+            <name>AI Development</name>
+            <deadline>2025-12-31</deadline>
+            <budget>500001.0</budget>
+            <technology>Java</technology>
+        </Project>
+    </projects>
+</Client>

@@ -50,7 +50,7 @@ public class Main {
 
         // Using CONSULTANT
         // Add a new consultant
-        Consultant consultant = new Consultant(1L, "John", "Doe", 5000D, "IT", new Manager());
+        Consultant consultant = new Consultant(1L, "John", "Doe", 5000D, "IT", new Manager(), List.of(new Project()));
         consultantService.add(consultant);
 
         // Get consultant by ID
