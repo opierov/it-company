@@ -22,7 +22,6 @@ public class Project {
     @JsonProperty("tasks")
     private List<String> tasks;
 
-    // Getters and Setters
     public int getId() {
         return id;
     }

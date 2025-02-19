@@ -22,7 +22,6 @@ public class Employee {
     @JsonProperty("projects")
     private List<Project> projects;
 
-    // Getters and Setters
     public int getId() {
         return id;
     }

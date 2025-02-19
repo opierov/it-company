@@ -22,7 +22,6 @@ public class RootData {
     @JsonProperty("managers")
     private List<Manager> managers;
 
-    // Getters and Setters
     public List<Employee> getEmployees() { return employees; }
     public void setEmployees(List<Employee> employees) { this.employees = employees; }
 

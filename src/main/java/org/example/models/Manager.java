@@ -19,7 +19,6 @@ public class Manager {
     @JsonProperty("employees")
     private List<Employee> employees;
 
-    // Getters and Setters
     public int getId() {
         return id;
     }

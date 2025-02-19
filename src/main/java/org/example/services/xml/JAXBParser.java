@@ -1,5 +1,7 @@
+/*
 package org.example;
 
+*/
 /*import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
@@ -8,17 +10,19 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.models.Client;
 
-import java.io.File;*/
+import java.io.File;*//*
+
 
 public class JAXBParser {
 
+*/
 /*    private static final Logger logger = LogManager.getLogger(JAXBParser.class);
 
     public static void main(String[] args) {
         try {
             JAXBContext context = JAXBContext.newInstance(Client.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
-            Client client = (Client) unmarshaller.unmarshal(new File("src/main/resources/company_JAXB.xml"));
+            Client client = (Client) unmarshaller.unmarshal(new File("src/main/resources/structures/company_JAXB.xml"));
 
             logger.info("Client parsed: {}", client.getName());
 
@@ -31,5 +35,7 @@ public class JAXBParser {
         } catch (JAXBException e) {
             logger.error("Error during JAXB parsing: ", e);
         }
-    }*/
+    }*//*
+
 }
+*/

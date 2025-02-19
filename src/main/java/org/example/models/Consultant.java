@@ -18,7 +18,6 @@ public class Consultant {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date hiredDate;
 
-    // Getters and Setters
     public int getId() {
         return id;
     }
