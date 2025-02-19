@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.dao.ProjectMapper">
+
+    <resultMap id="ProjectResultMap" type="org.example.models.Project">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="deadline" column="deadline"/>
+        <result property="budget" column="budget"/>
+        <result property="technology" column="technology"/>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO projects (name, deadline, budget, technology)
+        VALUES (#{name}, #{deadline}, #{budget}, #{technology})
+    </insert>
+
+    <select id="getById" resultMap="ProjectResultMap">
+        SELECT * FROM projects WHERE id = #{id}
+    </select>
+
+    <select id="getAll" resultMap="ProjectResultMap">
+        SELECT * FROM projects
+    </select>
+
+    <update id="update">
+        UPDATE projects
+        SET name = #{name}, deadline = #{deadline}, budget = #{budget}, technology = #{technology}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM projects WHERE id = #{id}
+    </delete>
+
+    <select id="getByTechnology" resultMap="ProjectResultMap">
+        SELECT * FROM projects WHERE technology = #{technology}
+    </select>
+
+</mapper>

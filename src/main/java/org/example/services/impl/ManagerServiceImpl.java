@@ -1,75 +1,66 @@
-/*
 package org.example.services.impl;
 
-import org.example.dao.ManagerDAO;
-import org.example.dao.impl.ManagerDAOImpl;
+import org.apache.ibatis.session.SqlSession;
+import org.example.mapper.ManagerMapper;
 import org.example.models.Manager;
 import org.example.services.ManagerService;
+import org.example.utils.MyBatisUtil;
 
 import java.util.List;
 import java.util.Optional;
 
 public class ManagerServiceImpl implements ManagerService {
 
-    private final ManagerDAO managerDAO;
+    private final ManagerMapper managerMapper;
 
     public ManagerServiceImpl() {
-        this.managerDAO = new ManagerDAOImpl(); // Inject DAO here
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            this.managerMapper = session.getMapper(ManagerMapper.class);
+        }
     }
 
     @Override
-    public void add(Manager manager) {
-        managerDAO.insert(manager);
+    public void addManager(Manager manager) {
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            managerMapper.insert(manager);
+            session.commit();
+        }
     }
 
     @Override
-    public Optional<Manager> getById(Long id) {
-        return managerDAO.getById(id);
+    public Optional<Manager> getManagerById(Long id) {
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            return managerMapper.getById(id);
+        }
     }
 
     @Override
-    public List<Manager> getAll() {
-        return managerDAO.getAll();
+    public List<Manager> getAllManagers() {
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            return managerMapper.getAll();
+        }
     }
 
     @Override
-    public void update(Manager manager) {
-        managerDAO.update(manager);
+    public void updateManager(Manager manager) {
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            managerMapper.update(manager);
+            session.commit();
+        }
     }
 
     @Override
-    public void delete(Long id) {
-        managerDAO.delete(id);
-    }
-
-    @Override
-    public List<Manager> getManagersByProjectId(Long projectId) {
-        return managerDAO.getManagersByProjectId(projectId);
-    }
-
-    @Override
-    public List<Manager> getManagersBySalaryRange(Double minSalary, Double maxSalary) {
-        return managerDAO.getBySalaryRange(minSalary, maxSalary);
+    public void deleteManager(Long id) {
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            managerMapper.delete(id);
+            session.commit();
+        }
     }
 
     @Override
     public List<Manager> getManagersByIndustry(String industry) {
-        return managerDAO.getByIndustry(industry);
-    }
-
-    @Override
-    public List<Manager> getManagersBySkills(String skills) {
-        return managerDAO.getBySkills(skills);
-    }
-
-    @Override
-    public void updateManagerSalary(Long id, Double newSalary) {
-        managerDAO.updateManagerSalary(id, newSalary);
-    }
-
-    @Override
-    public void removeManagersByIndustry(String industry) {
-        managerDAO.deleteByIndustry(industry);
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            return managerMapper.getByIndustry(industry);
+        }
     }
 }
-*/

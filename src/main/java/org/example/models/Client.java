@@ -1,61 +1,52 @@
 package org.example.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.List;
 
 public class Client {
-    @JsonProperty("id")
-    private int id;
 
-    @JsonProperty("name")
+    private Long id;
     private String name;
-
-    @JsonProperty("contactInfo")
     private String contactInfo;
+    private String firstName;
+    private String lastName;
+    private Project projects;
 
-    @JsonProperty("projects")
-    private List<Project> projects;
-
-    // Getters and Setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
+    public Client(Long id, String name, String contactInfo, String firstName, String lastName, Project projects) {
         this.id = id;
-    }
-
-    public List<Project> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(List<Project> projects) {
+        this.name = name;
+        this.contactInfo = contactInfo;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.projects = projects;
     }
 
-    public String getContactInfo() {
-        return contactInfo;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setContactInfo(String contactInfo) {
-        this.contactInfo = contactInfo;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public String getName() {
-        return name;
-    }
+    @JsonProperty("contact_info")
+    public String getContactInfo() { return contactInfo; }
+    public void setContactInfo(String contactInfo) { this.contactInfo = contactInfo; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public String getFirstName() { return firstName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
 
-    // toString() method
+    public String getLastName() { return lastName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
+
+    public Project getProjects() { return projects; }
+    public void setProjects(Project projects) { this.projects = projects; }
+
     @Override
     public String toString() {
         return "Client{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", contactInfo='" + contactInfo + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", projects=" + projects +
                 '}';
     }

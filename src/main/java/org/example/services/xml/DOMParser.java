@@ -1,4 +1,4 @@
-package org.example;
+package org.example.services.xml;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +13,7 @@ public class DOMParser {
 
     public static void main(String[] args) {
         try {
-            File inputFile = new File("src/main/resources/company.xml");
+            File inputFile = new File("src/main/resources/structures/company.xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document document = builder.parse(inputFile);

@@ -13,7 +13,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class ProjectDAOImpl implements ProjectDAO {
-    private static final Logger logger = LogManager.getLogger(ProjectDAOImpl.class);
+    private static final Logger logger = LogManager.getLogger(*/
+/**//*
+ProjectDAOImpl.class);
     private final Connection connection;
 
     public ProjectDAOImpl() {
@@ -259,6 +261,4 @@ public class ProjectDAOImpl implements ProjectDAO {
     }
 
 }
-
-
 */

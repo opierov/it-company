@@ -1,74 +1,66 @@
-/*
 package org.example.services.impl;
 
-import org.example.dao.ClientDAO;
-import org.example.dao.impl.ClientDAOImpl;
+import org.apache.ibatis.session.SqlSession;
+import org.example.mapper.ClientMapper;
 import org.example.models.Client;
 import org.example.services.ClientService;
+import org.example.utils.MyBatisUtil;
 
 import java.util.List;
 import java.util.Optional;
 
 public class ClientServiceImpl implements ClientService {
 
-    private final ClientDAO clientDAO;
+    private final ClientMapper clientMapper;
 
     public ClientServiceImpl() {
-        this.clientDAO = new ClientDAOImpl();
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            this.clientMapper = session.getMapper(ClientMapper.class);
+        }
     }
 
     @Override
-    public void add(Client client) {
-        clientDAO.insert(client);
+    public void addClient(Client client) {
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            clientMapper.insert(client);
+            session.commit();
+        }
     }
 
     @Override
-    public Optional<Client> getById(Long id) {
-        return clientDAO.getById(id);
+    public Optional<Client> getClientById(Long id) {
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            return clientMapper.getById(id);
+        }
     }
 
     @Override
-    public List<Client> getAll() {
-        return clientDAO.getAll();
+    public List<Client> getAllClients() {
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            return clientMapper.getAll();
+        }
     }
 
     @Override
-    public void update(Client client) {
-        clientDAO.update(client);
+    public void updateClient(Client client) {
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            clientMapper.update(client);
+            session.commit();
+        }
     }
 
     @Override
-    public void delete(Long id) {
-        clientDAO.delete(id);
+    public void deleteClient(Long id) {
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            clientMapper.delete(id);
+            session.commit();
+        }
     }
 
     @Override
-    public List<Client> getClientsByFirstName(String firstName) {
-        return clientDAO.getClientsByFirstName(firstName);
+    public List<Client> getClientsByName(String name) {
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            return clientMapper.getByName(name);
+        }
     }
-
-    @Override
-    public List<Client> getClientsByLastName(String lastName) {
-        return clientDAO.getClientsByLastName(lastName);
-    }
-
-    @Override
-    public List<Client> getClientsByContactInfo(String contactInfo) {
-        return clientDAO.getClientsByContactInfo(contactInfo);
-    }
-
-    @Override
-    public int getTotalClientCount() {
-        return clientDAO.getTotalClientCount();
-    }
-
-    @Override
-    public void updateClientContactInfo(Long id, String newContactInfo) {
-        clientDAO.updateContactInfo(id, newContactInfo);
-    }
-
-    @Override
-    public void deleteClientByContactInfo(String contactInfo) {
-        clientDAO.deleteByContactInfo(contactInfo);
-    }
-}*/
+}

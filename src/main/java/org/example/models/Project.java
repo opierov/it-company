@@ -1,77 +1,47 @@
 package org.example.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
-import java.util.List;
 
 public class Project {
-    @JsonProperty("id")
-    private int id;
-
-    @JsonProperty("name")
+    private Long id;
     private String name;
 
-    @JsonProperty("deadline")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date deadline;
 
-    @JsonProperty("client")
-    private Client client;
+    private double budget;
+    private String technology;
 
-    @JsonProperty("tasks")
-    private List<String> tasks;
+    public Project() {}
 
-    // Getters and Setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
+    public Project(Long id, String name, Date deadline, double budget, String technology) {
         this.id = id;
-    }
-
-    public List<String> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<String> tasks) {
-        this.tasks = tasks;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public Date getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(Date deadline) {
-        this.deadline = deadline;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
+        this.deadline = deadline;
+        this.budget = budget;
+        this.technology = technology;
     }
 
-    // toString() method
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public Date getDeadline() { return deadline; }
+    public void setDeadline(Date deadline) { this.deadline = deadline; }
+
+    public double getBudget() { return budget; }
+    public void setBudget(double budget) { this.budget = budget; }
+
+    public String getTechnology() { return technology; }
+    public void setTechnology(String technology) { this.technology = technology; }
+
     @Override
     public String toString() {
-        return "Project{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", deadline=" + deadline +
-                ", client=" + client +
-                ", tasks=" + tasks +
-                '}';
+        return "Project{id=" + id + ", name='" + name + "', deadline=" + deadline +
+                ", budget=" + budget + ", technology='" + technology + "'}";
     }
 }

@@ -3,15 +3,13 @@ package org.example.services;
 import org.example.models.Consultant;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface ConsultantService extends Service<Consultant> {
-
-    List<Consultant> getConsultantsByProjectAndManager(Long projectId, Long managerId);
+public interface ConsultantService {
+    void addConsultant(Consultant consultant);
+    Optional<Consultant> getConsultantById(Long id);
+    List<Consultant> getAllConsultants();
+    void updateConsultant(Consultant consultant);
+    void deleteConsultant(Long id);
     List<Consultant> getConsultantsByIndustry(String industry);
-    List<Consultant> getConsultantsBySalaryRange(Double minSalary, Double maxSalary);
-    List<Consultant> getConsultantsByManagerId(Long managerId);
-    void updateConsultantSalary(Long id, Double newSalary);
-    void updateConsultantIndustry(Long id, String newIndustry);
-    void removeConsultantsByManagerId(Long managerId);
-
 }

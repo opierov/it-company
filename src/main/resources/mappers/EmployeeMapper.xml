@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.dao.mybatis.EmployeeMapper">
+
+    <resultMap id="EmployeeResultMap" type="org.example.models.Employee">
+        <id property="id" column="id" />
+        <result property="firstName" column="first_name" />
+        <result property="lastName" column="last_name" />
+        <result property="role" column="role" />
+        <result property="salary" column="salary" />
+        <result property="skills" column="skills" />
+    </resultMap>
+
+    <insert id="insertEmployee" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO employees (first_name, last_name, role, salary, skills)
+        VALUES (#{firstName}, #{lastName}, #{role}, #{salary}, #{skills})
+    </insert>
+
+    <select id="getEmployeeById" resultMap="EmployeeResultMap">
+        SELECT * FROM employees WHERE id = #{id}
+    </select>
+
+    <select id="getAllEmployees" resultMap="EmployeeResultMap">
+        SELECT * FROM employees
+    </select>
+
+    <update id="updateEmployee">
+        UPDATE employees
+        SET first_name = #{firstName}, last_name = #{lastName}, role = #{role}, salary = #{salary}, skills = #{skills}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteEmployee">
+        DELETE FROM employees WHERE id = #{id}
+    </delete>
+
+</mapper>

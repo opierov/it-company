@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.dao.ManagerMapper">
+
+    <resultMap id="ManagerResultMap" type="org.example.models.Manager">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="salary" column="salary"/>
+        <result property="industry" column="industry"/>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO managers (name, id, salary, industry)
+        VALUES (#{name}, #{id}, #{salary}, #{industry})
+    </insert>
+
+    <select id="getById" resultMap="ManagerResultMap">
+        SELECT * FROM managers WHERE id = #{id}
+    </select>
+
+    <select id="getAll" resultMap="ManagerResultMap">
+        SELECT * FROM managers
+    </select>
+
+    <update id="update">
+        UPDATE managers
+        SET name = #{name}, salary = #{salary}, industry = #{industry}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM managers WHERE id = #{id}
+    </delete>
+
+    <select id="getByIndustry" resultMap="ManagerResultMap">
+        SELECT * FROM managers WHERE industry = #{industry}
+    </select>
+
+</mapper>

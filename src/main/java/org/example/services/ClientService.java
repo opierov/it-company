@@ -3,12 +3,13 @@ package org.example.services;
 import org.example.models.Client;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface ClientService extends Service<Client> {
-    List<Client> getClientsByFirstName(String firstName);
-    List<Client> getClientsByLastName(String lastName);
-    List<Client> getClientsByContactInfo(String contactInfo);
-    int getTotalClientCount();
-    void updateClientContactInfo(Long id, String newContactInfo);
-    void deleteClientByContactInfo(String contactInfo);
+public interface ClientService {
+    void addClient(Client client);
+    Optional<Client> getClientById(Long id);
+    List<Client> getAllClients();
+    void updateClient(Client client);
+    void deleteClient(Long id);
+    List<Client> getClientsByName(String name);
 }

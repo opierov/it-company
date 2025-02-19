@@ -1,79 +1,66 @@
-/*
 package org.example.services.impl;
 
-import org.example.dao.ConsultantDAO;
-import org.example.dao.impl.ConsultantDAOImpl;
+import org.apache.ibatis.session.SqlSession;
+import org.example.mapper.ConsultantMapper;
 import org.example.models.Consultant;
 import org.example.services.ConsultantService;
+import org.example.utils.MyBatisUtil;
 
 import java.util.List;
 import java.util.Optional;
 
 public class ConsultantServiceImpl implements ConsultantService {
 
-    private final ConsultantDAO consultantDAO;
+    private final ConsultantMapper consultantMapper;
 
     public ConsultantServiceImpl() {
-        this.consultantDAO = new ConsultantDAOImpl();
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            this.consultantMapper = session.getMapper(ConsultantMapper.class);
+        }
     }
 
     @Override
-    public void add(Consultant consultant) {
-        consultantDAO.insert(consultant);
+    public void addConsultant(Consultant consultant) {
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            consultantMapper.insert(consultant);
+            session.commit();
+        }
     }
 
     @Override
-    public Optional<Consultant> getById(Long id) {
-        return consultantDAO.getById(id);
+    public Optional<Consultant> getConsultantById(Long id) {
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            return consultantMapper.getById(id);
+        }
     }
 
     @Override
-    public List<Consultant> getAll() {
-        return consultantDAO.getAll();
+    public List<Consultant> getAllConsultants() {
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            return consultantMapper.getAll();
+        }
     }
 
     @Override
-    public void update(Consultant consultant) {
-        consultantDAO.update(consultant);
+    public void updateConsultant(Consultant consultant) {
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            consultantMapper.update(consultant);
+            session.commit();
+        }
     }
 
     @Override
-    public void delete(Long id) {
-        consultantDAO.delete(id);
-    }
-
-    @Override
-    public List<Consultant> getConsultantsByProjectAndManager(Long projectId, Long managerId) {
-        return consultantDAO.getByProjectAndManager(projectId, managerId);
+    public void deleteConsultant(Long id) {
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            consultantMapper.delete(id);
+            session.commit();
+        }
     }
 
     @Override
     public List<Consultant> getConsultantsByIndustry(String industry) {
-        return consultantDAO.getByIndustry(industry);
+        try (SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession()) {
+            return consultantMapper.getByIndustry(industry);
+        }
     }
-
-    @Override
-    public List<Consultant> getConsultantsBySalaryRange(Double minSalary, Double maxSalary) {
-        return consultantDAO.getBySalaryRange(minSalary, maxSalary);
-    }
-
-    @Override
-    public List<Consultant> getConsultantsByManagerId(Long managerId) {
-        return consultantDAO.getByManagerId(managerId);
-    }
-
-    @Override
-    public void updateConsultantSalary(Long id, Double newSalary) {
-        consultantDAO.updateSalary(id, newSalary);
-    }
-
-    @Override
-    public void updateConsultantIndustry(Long id, String newIndustry) {
-        consultantDAO.updateIndustry(id, newIndustry);
-    }
-
-    @Override
-    public void removeConsultantsByManagerId(Long managerId) {
-        consultantDAO.deleteByManagerId(managerId);
-    }
-}*/
+}

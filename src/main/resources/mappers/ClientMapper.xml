@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.dao.ClientMapper">
+
+    <resultMap id="ClientResultMap" type="org.example.models.Client">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="contactInfo" column="contact_info"/>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO clients (name, contact_info) VALUES (#{name}, #{contactInfo})
+    </insert>
+
+    <select id="getById" resultMap="ClientResultMap">
+        SELECT * FROM clients WHERE id = #{id}
+    </select>
+
+    <select id="getAll" resultMap="ClientResultMap">
+        SELECT * FROM clients
+    </select>
+
+    <update id="update">
+        UPDATE clients SET name = #{name}, contact_info = #{contactInfo} WHERE id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM clients WHERE id = #{id}
+    </delete>
+
+    <select id="getByName" resultMap="ClientResultMap">
+        SELECT * FROM clients WHERE name = #{name}
+    </select>
+
+</mapper>

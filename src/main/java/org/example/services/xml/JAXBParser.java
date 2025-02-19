@@ -1,4 +1,4 @@
-package org.example;
+package org.example.services.xml;
 
 /*import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
@@ -18,7 +18,7 @@ public class JAXBParser {
         try {
             JAXBContext context = JAXBContext.newInstance(Client.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
-            Client client = (Client) unmarshaller.unmarshal(new File("src/main/resources/company_JAXB.xml"));
+            Client client = (Client) unmarshaller.unmarshal(new File("src/main/resources/structures/company_JAXB.xml"));
 
             logger.info("Client parsed: {}", client.getName());
 

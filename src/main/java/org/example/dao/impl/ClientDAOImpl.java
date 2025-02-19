@@ -198,7 +198,7 @@ public class ClientDAOImpl implements ClientDAO {
     }
 
     private Client mapToClient(ResultSet rs) throws SQLException {
-        Client client = new Client();
+        Client client = new Client(1L, "Apple", "john@example.com", "John", "Doe", new Project());
         client.setId(rs.getLong("id"));
         client.setName(rs.getString("name"));
         client.setContactInfo(rs.getString("contact_info"));
