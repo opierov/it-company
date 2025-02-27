@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.models.*;
 import org.example.services.*;
+import org.example.services.factory.ServiceFactory;
 import org.example.services.impl.*;
 
 import java.util.List;
@@ -15,12 +16,17 @@ public class Main {
 
     public static void main(String[] args) {
 
+        EmployeeService employeeService = (EmployeeService) ServiceFactory.getService(ServiceFactory.ServiceType.EMPLOYEE);
+        ClientService clientService = (ClientService) ServiceFactory.getService(ServiceFactory.ServiceType.CLIENT);
+        ConsultantService consultantService = (ConsultantService) ServiceFactory.getService(ServiceFactory.ServiceType.CONSULTANT);
+        ManagerService managerService = (ManagerService) ServiceFactory.getService(ServiceFactory.ServiceType.MANAGER);
+        ProjectService projectService = (ProjectService) ServiceFactory.getService(ServiceFactory.ServiceType.PROJECT);
 
-        ClientService clientService = new ClientServiceImpl();
+/*        ClientService clientService = new ClientServiceImpl();
         ConsultantService consultantService = new ConsultantServiceImpl();
         EmployeeService employeeService = new EmployeeServiceImpl();
         ManagerService managerService = new ManagerServiceImpl();
-        ProjectService projectService = new ProjectServiceImpl();
+        ProjectService projectService = new ProjectServiceImpl();*/
 
         // USING CLIENT
         // 1. Add a new client
