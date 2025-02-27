@@ -8,7 +8,7 @@ public interface ProjectDAO extends BaseDAO<Project> {
     List<Project> getProjectWithClientAndManager(Long projectId);
 
     List<Project> getByTechnology(String technology);
-    List<Project> getByBudgetRange(double minBudget, double maxBudget);
+    List<Project> getByBudgetRange(Double minBudget, Double maxBudget);
     List<Project> getByDeadline(String deadline);
     List<Project> getByName(String name);
 

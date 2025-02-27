@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.dao.ConsultantMapper">
+
+    <insert id="insertConsultant" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO consultants (first_name, last_name, salary, industry, managers_id)
+        VALUES (#{firstName}, #{lastName}, #{salary}, #{industry}, #{manager.id})
+    </insert>
+
+    <select id="getById" parameterType="long" resultMap="ConsultantResultMap">
+        SELECT c.*, m.id AS manager_id, m.first_name AS manager_name
+        FROM consultants c
+        LEFT JOIN managers m ON c.managers_id = m.id
+        WHERE c.id = #{id}
+    </select>
+
+    <select id="getAll" resultMap="ConsultantResultMap">
+        SELECT c.*, m.id AS manager_id, m.first_name AS manager_name
+        FROM consultants c
+        LEFT JOIN managers m ON c.managers_id = m.id
+    </select>
+
+    <select id="getByIndustry" parameterType="string" resultMap="ConsultantResultMap">
+        SELECT c.*, m.id AS manager_id, m.first_name AS manager_name
+        FROM consultants c
+        LEFT JOIN managers m ON c.managers_id = m.id
+        WHERE c.industry = #{industry}
+    </select>
+
+    <select id="getBySalaryRange" parameterType="map" resultMap="ConsultantResultMap">
+        SELECT c.*, m.id AS manager_id, m.first_name AS manager_name
+        FROM consultants c
+        LEFT JOIN managers m ON c.managers_id = m.id
+        WHERE c.salary BETWEEN #{minSalary} AND #{maxSalary}
+    </select>
+
+    <select id="getByManagerId" parameterType="long" resultMap="ConsultantResultMap">
+        SELECT c.*, m.id AS manager_id, m.first_name AS manager_name
+        FROM consultants c
+        LEFT JOIN managers m ON c.managers_id = m.id
+        WHERE c.managers_id = #{managerId}
+    </select>
+
+    <select id="getByProjectAndManager" parameterType="map" resultMap="ConsultantResultMap">
+        SELECT c.*, m.id AS manager_id, m.first_name AS manager_name
+        FROM consultants c
+        JOIN consultant_projects cp ON c.id = cp.consultants_id
+        JOIN managers m ON c.managers_id = m.id
+        WHERE cp.projects_id = #{projectId} AND m.id = #{managerId}
+    </select>
+
+    <update id="updateConsultant">
+        UPDATE consultants
+        SET first_name = #{firstName}, last_name = #{lastName}, salary = #{salary}, industry = #{industry}, managers_id = #{manager.id}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateSalary">
+        UPDATE consultants SET salary = #{newSalary} WHERE id = #{id}
+    </update>
+
+    <update id="updateIndustry">
+        UPDATE consultants SET industry = #{newIndustry} WHERE id = #{id}
+    </update>
+
+    <delete id="deleteConsultant">
+        DELETE FROM consultants WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteByManagerId">
+        DELETE FROM consultants WHERE managers_id = #{managerId}
+    </delete>
+
+    <resultMap id="ConsultantResultMap" type="org.example.models.Consultant">
+        <id property="id" column="id"/>
+        <result property="firstName" column="first_name"/>
+        <result property="lastName" column="last_name"/>
+        <result property="salary" column="salary"/>
+        <result property="industry" column="industry"/>
+        <association property="manager" javaType="org.example.models.Manager">
+            <id property="id" column="manager_id"/>
+            <result property="name" column="manager_name"/>
+        </association>
+        <association property="project" javaType="org.example.models.Project">
+            <id property="id" column="projects_id"/>
+            <result property="name" column="project_name"/>
+        </association>
+    </resultMap>
+
+</mapper>

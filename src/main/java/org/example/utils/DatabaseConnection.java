@@ -1,3 +1,4 @@
+/*
 package org.example.utils;
 
 import java.io.IOException;
@@ -12,15 +13,15 @@ public class DatabaseConnection {
     private final Connection connection;
 
     private DatabaseConnection() {
-        try (InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties")) {
+        try (InputStream input = getClass().getClassLoader().getResourceAsStream("database.properties")) {
             Properties properties = new Properties();
             if (input == null) {
-                throw new IOException("Unable to find config.properties");
+                throw new IOException("Unable to find database.properties");
             }
             properties.load(input);
 
             String url = properties.getProperty("db.url");
-            String user = properties.getProperty("db.user");
+            String user = properties.getProperty("db.username");
             String password = properties.getProperty("db.password");
 
             this.connection = DriverManager.getConnection(url, user, password);
@@ -44,3 +45,4 @@ public class DatabaseConnection {
         return connection;
     }
 }
+*/

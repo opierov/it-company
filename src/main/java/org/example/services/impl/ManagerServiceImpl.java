@@ -1,7 +1,8 @@
 package org.example.services.impl;
 
 import org.example.dao.ManagerDAO;
-import org.example.dao.impl.ManagerDAOImpl;
+//import org.example.dao.impl.ManagerDAOImpl;
+import org.example.dao.mybatis.ManagerMapperImpl;
 import org.example.models.Manager;
 import org.example.services.ManagerService;
 
@@ -13,7 +14,8 @@ public class ManagerServiceImpl implements ManagerService {
     private final ManagerDAO managerDAO;
 
     public ManagerServiceImpl() {
-        this.managerDAO = new ManagerDAOImpl(); // Inject DAO here
+        //this.managerDAO = new ManagerDAOImpl();
+        this.managerDAO = new ManagerMapperImpl();
     }
 
     @Override

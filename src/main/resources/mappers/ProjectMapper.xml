@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.dao.ProjectMapper">
+
+    <insert id="insert" parameterType="org.example.models.Project" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO projects (name, deadline, budget, technology)
+        VALUES (#{name}, #{deadline}, #{budget}, #{technology})
+    </insert>
+
+    <select id="getProjectWithClientAndManager" resultMap="ProjectWithClientAndManagerResult" parameterType="long">
+        SELECT p.*, c.id AS client_id, c.name AS client_name, c.contact_info,
+        m.id AS manager_id, m.name AS manager_name, m.salary
+        FROM projects p
+        JOIN clients c ON p.id = c.projects_id
+        JOIN managers m ON p.id = m.id
+        WHERE p.id = #{projectId}
+    </select>
+
+    <select id="getAll" resultType="org.example.models.Project">
+        SELECT * FROM projects
+    </select>
+
+    <select id="getById" parameterType="long" resultType="org.example.models.Project">
+        SELECT * FROM projects WHERE id = #{id}
+    </select>
+
+    <select id="getByTechnology" parameterType="string" resultType="org.example.models.Project">
+        SELECT * FROM projects WHERE technology LIKE CONCAT('%', #{technology}, '%')
+    </select>
+
+    <select id="getByBudgetRange" parameterType="map" resultType="org.example.models.Project">
+        SELECT * FROM projects WHERE budget BETWEEN #{minBudget} AND #{maxBudget}
+    </select>
+
+    <select id="getByDeadline" parameterType="string" resultType="org.example.models.Project">
+        SELECT * FROM projects WHERE deadline = #{deadline}
+    </select>
+
+    <select id="getByName" parameterType="string" resultType="org.example.models.Project">
+        SELECT * FROM projects WHERE name LIKE CONCAT('%', #{name}, '%')
+    </select>
+
+    <update id="update" parameterType="org.example.models.Project">
+        UPDATE projects
+        SET name = #{name}, deadline = #{deadline}, budget = #{budget}, technology = #{technology}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateProjectName" parameterType="map">
+        UPDATE projects SET name = #{newName} WHERE id = #{id}
+    </update>
+
+    <update id="updateProjectTechnology" parameterType="map">
+        UPDATE projects SET technology = #{newTechnology} WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM projects WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteByTechnology" parameterType="string">
+        DELETE FROM projects WHERE technology = #{technology}
+    </delete>
+
+    <resultMap id="ProjectWithClientAndManagerResult" type="org.example.models.Project">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="deadline" column="deadline"/>
+        <result property="budget" column="budget"/>
+        <result property="technology" column="technology"/>
+        <association property="client" javaType="org.example.models.Client">
+            <id property="id" column="client_id"/>
+            <result property="name" column="client_name"/>
+            <result property="contactInfo" column="contact_info"/>
+        </association>
+        <association property="manager" javaType="org.example.models.Manager">
+            <id property="id" column="manager_id"/>
+            <result property="name" column="manager_name"/>
+            <result property="salary" column="salary"/>
+        </association>
+    </resultMap>
+
+</mapper>

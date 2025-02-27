@@ -1,7 +1,8 @@
 package org.example.services.impl;
 
 import org.example.dao.ProjectDAO;
-import org.example.dao.impl.ProjectDAOImpl;
+//import org.example.dao.impl.ProjectDAOImpl;
+import org.example.dao.mybatis.ProjectMapperImpl;
 import org.example.models.Project;
 import org.example.services.ProjectService;
 
@@ -13,7 +14,8 @@ public class ProjectServiceImpl implements ProjectService {
     private final ProjectDAO projectDAO;
 
     public ProjectServiceImpl() {
-        this.projectDAO = new ProjectDAOImpl();
+        //this.projectDAO = new ProjectDAOImpl();
+        this.projectDAO = new ProjectMapperImpl();
     }
 
     @Override

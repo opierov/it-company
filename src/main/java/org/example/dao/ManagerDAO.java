@@ -7,11 +7,11 @@ public interface ManagerDAO extends BaseDAO<Manager> {
 
     List<Manager> getManagersByProjectId(Long projectId);
 
-    List<Manager> getBySalaryRange(double minSalary, double maxSalary);
+    List<Manager> getBySalaryRange(Double minSalary, Double maxSalary);
     List<Manager> getByIndustry(String industry);
     List<Manager> getBySkills(String skills);
 
-    void updateManagerSalary(Long id, double newSalary);
+    void updateManagerSalary(Long id, Double newSalary);
 
     void deleteByIndustry(String industry);
 }

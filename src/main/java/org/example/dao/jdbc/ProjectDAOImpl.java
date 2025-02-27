@@ -1,3 +1,4 @@
+/*
 package org.example.dao.impl;
 
 import org.apache.logging.log4j.LogManager;
@@ -116,7 +117,7 @@ public class ProjectDAOImpl implements ProjectDAO {
     }
 
     @Override
-    public List<Project> getByBudgetRange(double minBudget, double maxBudget) {
+    public List<Project> getByBudgetRange(Double minBudget, Double maxBudget) {
         List<Project> projects = new ArrayList<>();
         String sql = "SELECT * FROM projects WHERE budget BETWEEN ? AND ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
@@ -259,3 +260,4 @@ public class ProjectDAOImpl implements ProjectDAO {
 }
 
 
+*/

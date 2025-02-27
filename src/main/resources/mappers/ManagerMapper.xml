@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.dao.ManagerMapper">
+
+    <insert id="insert" parameterType="org.example.models.Manager" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO managers (first_name, last_name, salary, industry, skills)
+        VALUES (#{firstName}, #{lastName}, #{salary}, #{industry}, #{skills})
+    </insert>
+
+    <select id="getManagersByProjectId" parameterType="Long" resultType="org.example.models.Manager">
+        SELECT m.* FROM managers m
+        JOIN consultants c ON m.id = c.managers_id
+        JOIN consultant_projects cp ON c.id = cp.consultants_id
+        WHERE cp.projects_id = #{projectId}
+    </select>
+
+    <select id="getById" parameterType="Long" resultType="org.example.models.Manager">
+        SELECT * FROM managers WHERE id = #{id}
+    </select>
+
+    <select id="getByIndustry" parameterType="String" resultType="org.example.models.Manager">
+        SELECT * FROM managers WHERE industry = #{industry}
+    </select>
+
+    <select id="getAll" resultType="org.example.models.Manager">
+        SELECT * FROM managers
+    </select>
+
+    <select id="getBySalaryRange" parameterType="map" resultType="org.example.models.Manager">
+        SELECT * FROM managers WHERE salary BETWEEN #{minSalary} AND #{maxSalary}
+    </select>
+
+    <select id="getBySkills" parameterType="String" resultType="org.example.models.Manager">
+        SELECT * FROM managers WHERE skills LIKE CONCAT('%', #{skills}, '%')
+    </select>
+
+    <update id="update" parameterType="org.example.models.Manager">
+        UPDATE managers SET
+        first_name = #{firstName},
+        last_name = #{lastName},
+        salary = #{salary},
+        industry = #{industry},
+        skills = #{skills}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateManagerSalary" parameterType="map">
+        UPDATE managers SET salary = #{newSalary} WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Long">
+        DELETE FROM managers WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteByIndustry" parameterType="String">
+        DELETE FROM managers WHERE industry = #{industry}
+    </delete>
+
+    <resultMap id="managerResultMap" type="org.example.models.Manager">
+        <id property="id" column="id"/>
+        <result property="firstName" column="first_name"/>
+        <result property="lastName" column="last_name"/>
+        <result property="salary" column="salary"/>
+        <result property="industry" column="industry"/>
+        <result property="skills" column="skills"/>
+        <association property="employee" javaType="org.example.models.Employee">
+            <id property="id" column="employee_id"/>
+            <result property="name" column="employee_name"/>
+        </association>
+        <association property="consultant" javaType="org.example.models.Consultant">
+            <id property="id" column="consultant_id"/>
+            <result property="name" column="consultant_name"/>
+        </association>
+    </resultMap>
+
+</mapper>

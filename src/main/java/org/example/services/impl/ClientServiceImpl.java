@@ -1,7 +1,8 @@
 package org.example.services.impl;
 
 import org.example.dao.ClientDAO;
-import org.example.dao.impl.ClientDAOImpl;
+//import org.example.dao.impl.ClientDAOImpl;
+import org.example.dao.mybatis.ClientMapperImpl;
 import org.example.models.Client;
 import org.example.services.ClientService;
 
@@ -13,7 +14,8 @@ public class ClientServiceImpl implements ClientService {
     private final ClientDAO clientDAO;
 
     public ClientServiceImpl() {
-        this.clientDAO = new ClientDAOImpl();
+        //this.clientDAO = new ClientDAOImpl();
+        this.clientDAO = new ClientMapperImpl();
     }
 
     @Override

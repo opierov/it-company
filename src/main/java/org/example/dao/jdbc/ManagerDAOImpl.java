@@ -1,3 +1,4 @@
+/*
 package org.example.dao.impl;
 
 import org.apache.logging.log4j.LogManager;
@@ -204,3 +205,4 @@ public class ManagerDAOImpl implements ManagerDAO {
         return manager;
     }
 }
+*/

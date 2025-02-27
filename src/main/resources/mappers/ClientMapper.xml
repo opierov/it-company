@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.dao.ClientMapper">
+
+    <insert id="insert" parameterType="org.example.models.Client" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO clients (name, contact_info, first_name, last_name, projects_id)
+        VALUES (#{name}, #{contactInfo}, #{firstName}, #{lastName}, #{project.id})
+    </insert>
+
+    <select id="getById" parameterType="long" resultMap="clientResultMap">
+        SELECT c.*, p.name AS project_name, e.name AS employee_name
+        FROM clients c
+        LEFT JOIN projects p ON c.projects_id = p.id
+        LEFT JOIN employees e ON e.client_id = c.id
+        WHERE c.id = #{id}
+    </select>
+
+    <select id="getAll" resultMap="clientResultMap">
+        SELECT c.*, p.name AS project_name
+        FROM clients c
+        LEFT JOIN projects p ON c.projects_id = p.id
+    </select>
+
+    <select id="getClientsByContactInfo" parameterType="string" resultMap="clientResultMap">
+        SELECT c.*, p.name AS project_name
+        FROM clients c
+        LEFT JOIN projects p ON c.projects_id = p.id
+        WHERE c.contact_info = #{contactInfo}
+    </select>
+
+    <select id="getClientsByFirstName" parameterType="string" resultMap="clientResultMap">
+        SELECT * FROM clients WHERE first_name = #{firstName}
+    </select>
+
+    <select id="getClientsByLastName" parameterType="string" resultMap="clientResultMap">
+        SELECT * FROM clients WHERE last_name = #{lastName}
+    </select>
+
+    <select id="getTotalClientCount" resultType="int">
+        SELECT COUNT(*) FROM clients
+    </select>
+
+    <update id="update" parameterType="org.example.models.Client">
+        UPDATE clients SET name = #{name}, contact_info = #{contactInfo}, first_name = #{firstName},
+        last_name = #{lastName}, projects_id = #{project.id}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateContactInfo" parameterType="map">
+        UPDATE clients SET contact_info = #{newContactInfo} WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM clients WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteByContactInfo" parameterType="string">
+        DELETE FROM clients WHERE contact_info = #{contactInfo}
+    </delete>
+
+    <resultMap id="clientResultMap" type="org.example.models.Client">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="contactInfo" column="contact_info"/>
+        <result property="firstName" column="first_name"/>
+        <result property="lastName" column="last_name"/>
+        <association property="project" javaType="org.example.models.Project">
+            <id property="id" column="projects_id"/>
+            <result property="name" column="project_name"/>
+        </association>
+    </resultMap>
+
+</mapper>
