@@ -15,6 +15,17 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // Choose database type
+        String dbType = "MYSQL";  // Can be "POSTGRESQL" if needed
+
+        // Get appropriate DAO Factory
+        DAOFactory daoFactory = DAOFactoryProvider.getFactory(dbType);
+
+        // Get DAOs
+        EmployeeDAO employeeDAO = daoFactory.createEmployeeDAO();
+        ProjectDAO projectDAO = daoFactory.createProjectDAO();
+
+
 
         ClientService clientService = new ClientServiceImpl();
         ConsultantService consultantService = new ConsultantServiceImpl();
