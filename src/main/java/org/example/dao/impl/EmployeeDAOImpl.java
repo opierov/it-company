@@ -191,13 +191,14 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     private Employee mapResultSetToEmployee(ResultSet rs) throws SQLException {
-        Employee employee = new Employee();
-        employee.setId(rs.getLong("id"));
-        employee.setFirstName(rs.getString("first_name"));
-        employee.setLastName(rs.getString("last_name"));
-        employee.setRole(rs.getString("role"));
-        employee.setSalary(rs.getDouble("salary"));
-        employee.setSkills(rs.getString("skills"));
-        return employee;
+        return new Employee.EmployeeBuilder()
+                .setId(rs.getLong("id"))
+                .setFirstName(rs.getString("first_name"))
+                .setLastName(rs.getString("last_name"))
+                .setRole(rs.getString("role"))
+                .setSalary(rs.getDouble("salary"))
+                .setSkills(rs.getString("skills"))
+                .build();
+
     }
 }

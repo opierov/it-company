@@ -69,12 +69,14 @@ public class Main {
 
         // USING EMPLOYEE
         // 1. Create a new employee
-        Employee newEmployee = new Employee();
-        newEmployee.setFirstName("John");
-        newEmployee.setLastName("Doe");
-        newEmployee.setRole("Software Engineer");
-        newEmployee.setSalary(80000.0);
-        newEmployee.setSkills("QA");
+        Employee newEmployee = new Employee.EmployeeBuilder()
+                .setId(123L)
+                .setFirstName("John")
+                .setLastName("Doe")
+                .setRole("Software Engineer")
+                .setSalary(80000.0)
+                .setSkills("QA")
+                .build();
 
         // Create the employee using the service
         employeeService.add(newEmployee);
