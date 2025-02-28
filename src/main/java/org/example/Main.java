@@ -2,8 +2,10 @@ package org.example;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.example.services.factory.ServiceFactory;
 import org.example.models.*;
 import org.example.services.*;
+import org.example.services.factory.ServiceFactoryProvider;
 import org.example.services.impl.*;
 
 import java.util.List;
@@ -16,22 +18,24 @@ public class Main {
     public static void main(String[] args) {
 
         // Choose database type
-        String dbType = "MYSQL";  // Can be "POSTGRESQL" if needed
+        String dbType = "MYSQL";
 
-        // Get appropriate DAO Factory
-        DAOFactory daoFactory = DAOFactoryProvider.getFactory(dbType);
+        // Get appropriate Service Factory
+        ServiceFactory serviceFactory = ServiceFactoryProvider.getFactory(dbType);
 
-        // Get DAOs
-        EmployeeDAO employeeDAO = daoFactory.createEmployeeDAO();
-        ProjectDAO projectDAO = daoFactory.createProjectDAO();
+        // Get Services
+        EmployeeService employeeService = serviceFactory.createEmployeeService();
+        ConsultantService consultantService = serviceFactory.createConsultantService();
+        ManagerService managerService = serviceFactory.createManagerService();
+        ProjectService projectService = serviceFactory.createProjectService();
+        ClientService clientService = serviceFactory.createClientService();
 
 
-
-        ClientService clientService = new ClientServiceImpl();
+/*        ClientService clientService = new ClientServiceImpl();
         ConsultantService consultantService = new ConsultantServiceImpl();
         EmployeeService employeeService = new EmployeeServiceImpl();
         ManagerService managerService = new ManagerServiceImpl();
-        ProjectService projectService = new ProjectServiceImpl();
+        ProjectService projectService = new ProjectServiceImpl();*/
 
         // USING CLIENT
         // 1. Add a new client
