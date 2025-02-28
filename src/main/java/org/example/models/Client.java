@@ -8,61 +8,82 @@ public class Client {
     private String contactInfo;
     private String firstName;
     private String lastName;
-    private List<Project> projects;
+    private Project project;
+
+    private Client(ClientBuilder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.contactInfo = builder.contactInfo;
+        this.firstName = builder.firstName;
+        this.lastName = builder.lastName;
+        this.project = builder.project;
+    }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getContactInfo() {
         return contactInfo;
-    }
-
-    public void setContactInfo(String contactInfo) {
-        this.contactInfo = contactInfo;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public Project getProject() {
+        return project;
     }
 
-    public List<Project> getProjects() {
-        return projects;
-    }
+    public static class ClientBuilder {
+        private Long id;
+        private String name;
+        private String contactInfo;
+        private String firstName;
+        private String lastName;
+        private Project project;
 
-    public void setProjects(List<Project> projects) {
+        public ClientBuilder setId(Long id) {
+            this.id = id;
+            return this;
+        }
 
-    }
+        public ClientBuilder setName(String name) {
+            this.name = name;
+            return this;
+        }
 
-    public Manager getProject() {
-        return null;
-    }
+        public ClientBuilder setContactInfo(String contactInfo) {
+            this.contactInfo = contactInfo;
+            return this;
+        }
 
-    public void setProject(Project project) {
+        public ClientBuilder setFirstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+
+        public ClientBuilder setLastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
+
+        public ClientBuilder setProjects(Project project) {
+            this.project = project;
+            return this;
+        }
+
+        public Client build() {
+            return new Client(this);
+        }
     }
 
 }

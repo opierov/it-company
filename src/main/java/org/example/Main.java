@@ -23,10 +23,18 @@ public class Main {
         ProjectService projectService = new ProjectServiceImpl();
 
         // USING CLIENT
-        // 1. Add a new client
-        Client client = new Client();
-        clientService.add(client);
-        logger.info("Client added: {}", client.getName());
+        // 1. Create a new client
+        Client newClient = new Client.ClientBuilder()
+                .setId(123L)
+                .setName("Apple")
+                .setContactInfo("apple@mail.com")
+                .setFirstName("Tim")
+                .setLastName("Cook")
+                .build();
+
+        // Create the client using the service
+        clientService.add(newClient);
+        logger.info("Client created with ID: {}", newClient.getId());
 
         // 2. Get a client by ID
         Optional<Client> retrievedClient = clientService.getById(1L);
@@ -49,9 +57,18 @@ public class Main {
         logger.info("Client removed.");
 
         // Using CONSULTANT
-        // Add a new consultant
-        Consultant consultant = new Consultant(1L, "John", "Doe", 5000D, "IT", new Manager());
-        consultantService.add(consultant);
+        // 1. Create a new consultant
+        Consultant newConsultant = new Consultant.ConsultantBuilder()
+                .setId(123L)
+                .setFirstName("John")
+                .setLastName("Doe")
+                .setSalary(80000.0)
+                .setIndustry("Crypto")
+                .build();
+
+        // Create the consultant using the service
+        consultantService.add(newConsultant);
+        logger.info("Consultant created with ID: {}", newConsultant.getId());
 
         // Get consultant by ID
         Optional<Consultant> retrievedConsultant = consultantService.getById(1L);
@@ -109,10 +126,19 @@ public class Main {
         });
 
         // USING MANAGER
-        // 1. Add a new manager
-        Manager manager = new Manager();
-        managerService.add(manager);
-        logger.info("Manager added: {}", manager.getFirstName());
+        // 1. Create a new manger
+        Manager newManager = new Manager.ManagerBuilder()
+                .setId(1L)
+                .setFirstName("Alex")
+                .setLastName("Petrov")
+                .setSalary(32443.00)
+                .setIndustry("Agro")
+                .setSkills("Java")
+                .build();
+
+        // Create the manager using the service
+        managerService.add(newManager);
+        logger.info("Manager created with ID: {}", newManager.getId());
 
         // 2. Get manager by ID
         Optional<Manager> retrievedManager = managerService.getById(1L);
@@ -152,11 +178,13 @@ public class Main {
 
         // USING PROJECT
         // 1. Create a new project
-        Project newProject = new Project();
-        newProject.setName("New AI Development");
-        newProject.setDeadline("2025-12-31");
-        newProject.setBudget(1000000.0);
-        newProject.setTechnology("AI, Machine Learning");
+        Project newProject = new Project.ProjectBuilder()
+                .setId(1L)
+                .setName("New AI Development")
+                .setDeadline("2025-12-31")
+                .setBudget(1000000.0)
+                .setTechnology("AI, Machine Learning")
+                .build();
 
         // Create the project using the service
         projectService.add(newProject);

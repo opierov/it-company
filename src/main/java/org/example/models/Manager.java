@@ -1,7 +1,5 @@
 package org.example.models;
 
-import java.util.List;
-
 public class Manager {
     private Long id;
     private String firstName;
@@ -9,9 +7,8 @@ public class Manager {
     private Double salary;
     private String industry;
     private String skills;
-
-    private List<Consultant> consultants;
-    private List<Employee> employees;
+    private Consultant consultant;
+    private Employee employee;
 
     public Manager(long managerId, String managerName) {
 
@@ -21,72 +18,95 @@ public class Manager {
 
     }
 
-    public Long getId() {
-        return id;
+    private Manager(ManagerBuilder builder) {
+        this.id = builder.id;
+        this.firstName = builder.firstName;
+        this.lastName = builder.lastName;
+        this.salary = builder.salary;
+        this.industry = builder.industry;
+        this.skills = builder.skills;
+        this.consultant = builder.consultant;
+        this.employee = builder.employee;
+
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getId() {
+        return id;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public double getSalary() {
+    public Double getSalary() {
         return salary;
-    }
-
-    public void setSalary(Double salary) {
-        this.salary = salary;
     }
 
     public String getIndustry() {
         return industry;
     }
 
-    public void setIndustry(String industry) {
-        this.industry = industry;
-    }
-
     public String getSkills() {
         return skills;
     }
 
-    public void setSkills(String skills) {
-        this.skills = skills;
-    }
+    public static class ManagerBuilder {
+        private Long id;
+        private String firstName;
+        private String lastName;
+        private Double salary;
+        private String industry;
+        private String skills;
+        private Consultant consultant;
+        private Employee employee;
 
-    public List<Consultant> getConsultants() {
-        return consultants;
-    }
+        public ManagerBuilder setId(Long id) {
+            this.id = id;
+            return this;
+        }
 
-    public void setConsultants(List<Consultant> consultants) {
-        this.consultants = consultants;
-    }
+        public ManagerBuilder setFirstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
 
-    public List<Employee> getEmployees() {
-        return employees;
-    }
+        public ManagerBuilder setLastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
 
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
+        public ManagerBuilder setSalary(double salary) {
+            this.salary = salary;
+            return this;
+        }
 
-    public void setName(String string) {
+        public ManagerBuilder setIndustry(String industry) {
+            this.industry = industry;
+            return this;
+        }
 
+        public ManagerBuilder setSkills(String skills) {
+            this.skills = skills;
+            return this;
+        }
+
+        public Manager.ManagerBuilder setConsultant(Consultant consultant) {
+            this.consultant = consultant;
+            return this;
+        }
+
+        public Manager.ManagerBuilder setEmployee(Employee employee) {
+            this.employee = employee;
+            return this;
+        }
+
+        public Manager build() {
+            return new Manager(this);
+        }
     }
 
 }

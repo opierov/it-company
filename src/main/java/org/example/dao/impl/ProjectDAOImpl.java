@@ -30,14 +30,8 @@ public class ProjectDAOImpl implements ProjectDAO {
             stmt.setDouble(3, project.getBudget());
             stmt.setString(4, project.getTechnology());
             stmt.executeUpdate();
-
-            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    project.setId(generatedKeys.getLong(1));
-                }
-            }
         } catch (SQLException e) {
-            logger.error("Error inserting project: ", e);
+            logger.error("Error inserting project: {}", project, e);
         }
     }
 
@@ -55,17 +49,12 @@ public class ProjectDAOImpl implements ProjectDAO {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Project project = mapToProject(rs);
-                Client client = mapToClient(rs);
-                Manager manager = mapToManager(rs);
-
-                project.setClient(client);
-                project.setManager(manager);
                 projects.add(project);
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             logger.error("Error fetching project with client and manager", e);
         }
-
         return projects;
     }
 
@@ -229,33 +218,16 @@ public class ProjectDAOImpl implements ProjectDAO {
     }
 
     private Project mapToProject(ResultSet rs) throws SQLException {
-        Project project = new Project();
-        project.setId(rs.getLong("id"));
-        project.setName(rs.getString("name"));
-        project.setDeadline(rs.getString("deadline"));
-        project.setBudget(rs.getDouble("budget"));
-        project.setTechnology(rs.getString("technology"));
-
-        return project;
-    }
-
-
-    private Client mapToClient(ResultSet rs) throws SQLException {
-        Client client = new Client();
-        client.setId(rs.getLong("c.id"));
-        client.setName(rs.getString("c.name"));
-        client.setContactInfo(rs.getString("c.contact_info"));
-        return client;
-    }
-
-    private Manager mapToManager(ResultSet rs) throws SQLException {
-        Manager manager = new Manager();
-        manager.setId((long) rs.getInt("m.id"));
-        manager.setName(rs.getString("m.name"));
-        manager.setSalary(rs.getDouble("m.salary"));
-        return manager;
+        return new Project.ProjectBuilder()
+                .setId(rs.getLong("id"))
+                .setName(rs.getString("name"))
+                .setDeadline(rs.getString("deadline"))
+                .setBudget(rs.getDouble("budget"))
+                .setTechnology(rs.getString("technology"))
+                .setManager(new Manager.ManagerBuilder()
+                        .setId(rs.getLong("manager_id"))
+                        .build())
+                .build();
     }
 
 }
-
-

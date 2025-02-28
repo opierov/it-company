@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.dao.ManagerDAO;
 import org.example.models.Manager;
+import org.example.models.Project;
 import org.example.utils.DatabaseConnection;
 
 import java.sql.*;
@@ -194,13 +195,13 @@ public class ManagerDAOImpl implements ManagerDAO {
     }
 
     private Manager mapToManager(ResultSet rs) throws SQLException {
-        Manager manager = new Manager();
-        manager.setId(rs.getLong("id"));
-        manager.setFirstName(rs.getString("first_name"));
-        manager.setLastName(rs.getString("last_name"));
-        manager.setSalary(rs.getDouble("salary"));
-        manager.setIndustry(rs.getString("industry"));
-        manager.setSkills(rs.getString("skills"));
-        return manager;
+        return new Manager.ManagerBuilder()
+                .setId(rs.getLong("id"))
+                .setFirstName(rs.getString("first_name"))
+                .setLastName(rs.getString("last_name"))
+                .setSalary(rs.getDouble("salary"))
+                .setIndustry(rs.getString("industry"))
+                .setSkills(rs.getString("skills"))
+                .build();
     }
 }

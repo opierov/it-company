@@ -197,18 +197,16 @@ public class ClientDAOImpl implements ClientDAO {
     }
 
     private Client mapToClient(ResultSet rs) throws SQLException {
-        Client client = new Client();
-        client.setId(rs.getLong("id"));
-        client.setName(rs.getString("name"));
-        client.setContactInfo(rs.getString("contact_info"));
-        client.setFirstName(rs.getString("first_name"));
-        client.setLastName(rs.getString("last_name"));
-
-        Project project = new Project();
-        project.setId(rs.getLong("projects_id"));
-        project.setName(rs.getString("project_name"));
-        client.setProject(project);
-
-        return client;
+        return new Client.ClientBuilder()
+            .setId(rs.getLong("id"))
+            .setName(rs.getString("name"))
+            .setContactInfo(rs.getString("contact_info"))
+            .setFirstName(rs.getString("first_name"))
+            .setLastName(rs.getString("last_name"))
+            .setProjects(new Project.ProjectBuilder()
+                    .setId(rs.getLong("project_id"))
+                    .build()
+            )
+            .build();
     }
 }

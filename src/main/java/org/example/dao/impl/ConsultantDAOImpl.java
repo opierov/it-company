@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.example.dao.ConsultantDAO;
 import org.example.models.Consultant;
 import org.example.models.Manager;
+import org.example.models.Project;
 import org.example.utils.DatabaseConnection;
 
 import java.sql.*;
@@ -215,17 +216,16 @@ public class ConsultantDAOImpl implements ConsultantDAO {
     }
 
     private Consultant mapToConsultant(ResultSet rs) throws SQLException {
-        return new Consultant(
-                rs.getLong("id"),
-                rs.getString("first_name"),
-                rs.getString("last_name"),
-                rs.getDouble("salary"),
-                rs.getString("industry"),
-                new Manager(
-                        rs.getLong("manager_id"),
-                        rs.getString("manager_name")
+        return new Consultant.ConsultantBuilder()
+                .setId(rs.getLong("id"))
+                .setFirstName(rs.getString("first_name"))
+                .setLastName(rs.getString("last_name"))
+                .setSalary(rs.getDouble("salary"))
+                .setIndustry(rs.getString("industry"))
+                .setManager(new Manager.ManagerBuilder()
+                        .setId(rs.getLong("manager_id"))
+                        .build()
                 )
-        );
+                .build();
     }
 }
-
