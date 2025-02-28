@@ -6,8 +6,9 @@ public class Project {
     private String deadline;
     private Double budget;
     private String technology;
-    private Manager manager;
     private Client client;
+    private Employee employee;
+    private Consultant consultant;
 
     private Project(ProjectBuilder builder) {
         this.id = builder.id;
@@ -15,8 +16,9 @@ public class Project {
         this.deadline = builder.deadline;
         this.budget = builder.budget;
         this.technology = builder.technology;
-        this.manager = builder.manager;
         this.client = builder.client;
+        this.employee = builder.employee;
+        this.consultant = builder.consultant;
     }
 
     public Long getId() {
@@ -39,14 +41,27 @@ public class Project {
         return technology;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public Consultant getConsultant() {
+        return consultant;
+    }
+
     public static class ProjectBuilder {
         private Long id;
         private String name;
         private String deadline;
         private Double budget;
         private String technology;
-        private Manager manager;
         private Client client;
+        private Employee employee;
+        private Consultant consultant;
 
         public ProjectBuilder setId(Long id) {
             this.id = id;
@@ -78,8 +93,13 @@ public class Project {
             return this;
         }
 
-        public ProjectBuilder setManager(Manager manager) {
-            this.manager = manager;
+        public ProjectBuilder setEmployee(Employee employee) {
+            this.employee = employee;
+            return this;
+        }
+
+        public ProjectBuilder setConsultant(Consultant consultant) {
+            this.consultant = consultant;
             return this;
         }
 

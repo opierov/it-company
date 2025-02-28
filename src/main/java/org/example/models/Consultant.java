@@ -52,8 +52,8 @@ public class Consultant {
         return manager;
     }
 
-    public long getManagerId() {
-        return manager != null ? manager.getId() : 0;
+    public Project getProject() {
+        return project;
     }
 
     public static class ConsultantBuilder {

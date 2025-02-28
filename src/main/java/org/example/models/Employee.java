@@ -1,8 +1,5 @@
 package org.example.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Employee {
     private Long id;
     private String firstName;
@@ -10,7 +7,8 @@ public class Employee {
     private String role;
     private Double salary;
     private String skills;
-    private List<Project> projects;
+    private Manager manager;
+    private Project project;
 
     public Employee(EmployeeBuilder builder) {
         this.id = builder.id;
@@ -19,7 +17,7 @@ public class Employee {
         this.role = builder.role;
         this.salary = builder.salary;
         this.skills = builder.skills;
-        this.projects = builder.projects;
+        this.project = builder.project;
     }
 
     public Long getId() {
@@ -46,8 +44,12 @@ public class Employee {
         return skills;
     }
 
-    public List<Project> getProjects() {
-        return projects;
+    public Manager getManager() {
+        return manager;
+    }
+
+    public Project getProject() {
+        return project;
     }
 
     public static class EmployeeBuilder {
@@ -57,7 +59,8 @@ public class Employee {
         private String role;
         private Double salary;
         private String skills;
-        private List<Project> projects = new ArrayList<>();
+        private Manager manager;
+        private Project project;
 
         public Employee.EmployeeBuilder setId(Long id) {
             this.id = id;
@@ -89,8 +92,13 @@ public class Employee {
             return this;
         }
 
-        public Employee.EmployeeBuilder setProjects(List<Project> projects) {
-            this.projects = projects;
+        public Employee.EmployeeBuilder setManager(Manager manager) {
+            this.manager = manager;
+            return this;
+        }
+
+        public Employee.EmployeeBuilder setProject(Project project) {
+            this.project = project;
             return this;
         }
 

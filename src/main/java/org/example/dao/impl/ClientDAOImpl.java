@@ -203,9 +203,9 @@ public class ClientDAOImpl implements ClientDAO {
             .setContactInfo(rs.getString("contact_info"))
             .setFirstName(rs.getString("first_name"))
             .setLastName(rs.getString("last_name"))
-            .setProjects(new Project.ProjectBuilder()
-                    .setId(rs.getLong("project_id"))
-                    .build()
+            .setProject(new Project.ProjectBuilder()
+                .setId(rs.getLong("project_id"))
+                .build()
             )
             .build();
     }

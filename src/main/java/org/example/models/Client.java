@@ -1,7 +1,5 @@
 package org.example.models;
 
-import java.util.List;
-
 public class Client {
     private Long id;
     private String name;
@@ -76,7 +74,7 @@ public class Client {
             return this;
         }
 
-        public ClientBuilder setProjects(Project project) {
+        public ClientBuilder setProject(Project project) {
             this.project = project;
             return this;
         }

@@ -27,12 +27,11 @@ public class ConsultantDAOImpl implements ConsultantDAO {
         String sql = "INSERT INTO consultants (first_name, last_name, salary, industry, managers_id) " +
                 "VALUES (?, ?, ?, ?, ?) ";
         try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            stmt.setString(1, consultant.getFirstName());
-            stmt.setString(2, consultant.getLastName());
-            stmt.setDouble(3, consultant.getSalary());
-            stmt.setString(4, consultant.getIndustry());
-            stmt.setLong(5, consultant.getManagerId());
-            stmt.setLong(6, consultant.getId());
+            stmt.setLong(1, consultant.getId());
+            stmt.setString(2, consultant.getFirstName());
+            stmt.setString(3, consultant.getLastName());
+            stmt.setDouble(4, consultant.getSalary());
+            stmt.setString(5, consultant.getIndustry());
             stmt.executeUpdate();
             logger.info("Consultant inserted successfully.");
         } catch (SQLException e) {
@@ -148,11 +147,11 @@ public class ConsultantDAOImpl implements ConsultantDAO {
         String sql = "UPDATE clients SET name = ?, contact_info = ?, first_name = ?, last_name = ?, projects_id = ? " +
                 "WHERE id = ? ";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, consultant.getFirstName());
-            stmt.setString(2, consultant.getLastName());
-            stmt.setDouble(3, consultant.getSalary());
-            stmt.setString(4, consultant.getIndustry());
-            stmt.setLong(5, consultant.getManagerId());
+            stmt.setLong(1, consultant.getId());
+            stmt.setString(2, consultant.getFirstName());
+            stmt.setString(3, consultant.getLastName());
+            stmt.setDouble(4, consultant.getSalary());
+            stmt.setString(5, consultant.getIndustry());
             stmt.executeUpdate();
             logger.info("Consultant updated successfully: {}", consultant.getId());
         } catch (SQLException e) {
@@ -217,15 +216,19 @@ public class ConsultantDAOImpl implements ConsultantDAO {
 
     private Consultant mapToConsultant(ResultSet rs) throws SQLException {
         return new Consultant.ConsultantBuilder()
-                .setId(rs.getLong("id"))
-                .setFirstName(rs.getString("first_name"))
-                .setLastName(rs.getString("last_name"))
-                .setSalary(rs.getDouble("salary"))
-                .setIndustry(rs.getString("industry"))
-                .setManager(new Manager.ManagerBuilder()
-                        .setId(rs.getLong("manager_id"))
-                        .build()
-                )
-                .build();
+            .setId(rs.getLong("id"))
+            .setFirstName(rs.getString("first_name"))
+            .setLastName(rs.getString("last_name"))
+            .setSalary(rs.getDouble("salary"))
+            .setIndustry(rs.getString("industry"))
+            .setManager(new Manager.ManagerBuilder()
+                .setId(rs.getLong("manager_id"))
+                .build()
+            )
+            .setProject(new Project.ProjectBuilder()
+                .setId(rs.getLong("project_id"))
+                .build()
+            )
+            .build();
     }
 }

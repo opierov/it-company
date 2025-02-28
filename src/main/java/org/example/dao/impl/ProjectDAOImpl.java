@@ -219,15 +219,23 @@ public class ProjectDAOImpl implements ProjectDAO {
 
     private Project mapToProject(ResultSet rs) throws SQLException {
         return new Project.ProjectBuilder()
-                .setId(rs.getLong("id"))
-                .setName(rs.getString("name"))
-                .setDeadline(rs.getString("deadline"))
-                .setBudget(rs.getDouble("budget"))
-                .setTechnology(rs.getString("technology"))
-                .setManager(new Manager.ManagerBuilder()
-                        .setId(rs.getLong("manager_id"))
-                        .build())
-                .build();
+            .setId(rs.getLong("id"))
+            .setName(rs.getString("name"))
+            .setDeadline(rs.getString("deadline"))
+            .setBudget(rs.getDouble("budget"))
+            .setTechnology(rs.getString("technology"))
+            .setClient(new Client.ClientBuilder()
+                .setId(rs.getLong("client_id"))
+                .build()
+            )
+            .setConsultant(new Consultant.ConsultantBuilder()
+                .setId(rs.getLong("consultant_id"))
+                .build()
+            )
+            .setEmployee(new Employee.EmployeeBuilder()
+                .setId(rs.getLong("employee_id"))
+                .build()
+            )
+            .build();
     }
-
 }

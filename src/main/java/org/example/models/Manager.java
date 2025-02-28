@@ -54,6 +54,14 @@ public class Manager {
         return skills;
     }
 
+    public Consultant getConsultant() {
+        return consultant;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
     public static class ManagerBuilder {
         private Long id;
         private String firstName;

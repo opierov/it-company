@@ -4,6 +4,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.dao.EmployeeDAO;
 import org.example.models.Employee;
+import org.example.models.Manager;
+import org.example.models.Project;
 import org.example.utils.DatabaseConnection;
 
 import java.sql.*;
@@ -192,13 +194,20 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     private Employee mapResultSetToEmployee(ResultSet rs) throws SQLException {
         return new Employee.EmployeeBuilder()
-                .setId(rs.getLong("id"))
-                .setFirstName(rs.getString("first_name"))
-                .setLastName(rs.getString("last_name"))
-                .setRole(rs.getString("role"))
-                .setSalary(rs.getDouble("salary"))
-                .setSkills(rs.getString("skills"))
-                .build();
-
+            .setId(rs.getLong("id"))
+            .setFirstName(rs.getString("first_name"))
+            .setLastName(rs.getString("last_name"))
+            .setRole(rs.getString("role"))
+            .setSalary(rs.getDouble("salary"))
+            .setSkills(rs.getString("skills"))
+            .setManager(new Manager.ManagerBuilder()
+                .setId(rs.getLong("manager_id"))
+                .build()
+            )
+            .setProject(new Project.ProjectBuilder()
+                .setId(rs.getLong("project_id"))
+                .build()
+            )
+            .build();
     }
 }

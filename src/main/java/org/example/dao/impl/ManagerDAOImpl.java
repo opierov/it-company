@@ -3,6 +3,8 @@ package org.example.dao.impl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.dao.ManagerDAO;
+import org.example.models.Consultant;
+import org.example.models.Employee;
 import org.example.models.Manager;
 import org.example.models.Project;
 import org.example.utils.DatabaseConnection;
@@ -196,12 +198,20 @@ public class ManagerDAOImpl implements ManagerDAO {
 
     private Manager mapToManager(ResultSet rs) throws SQLException {
         return new Manager.ManagerBuilder()
-                .setId(rs.getLong("id"))
-                .setFirstName(rs.getString("first_name"))
-                .setLastName(rs.getString("last_name"))
-                .setSalary(rs.getDouble("salary"))
-                .setIndustry(rs.getString("industry"))
-                .setSkills(rs.getString("skills"))
-                .build();
+            .setId(rs.getLong("id"))
+            .setFirstName(rs.getString("first_name"))
+            .setLastName(rs.getString("last_name"))
+            .setSalary(rs.getDouble("salary"))
+            .setIndustry(rs.getString("industry"))
+            .setSkills(rs.getString("skills"))
+            .setConsultant(new Consultant.ConsultantBuilder()
+                .setId(rs.getLong("consultant_id"))
+                .build()
+            )
+            .setEmployee(new Employee.EmployeeBuilder()
+                .setId(rs.getLong("employee_id"))
+                .build()
+            )
+            .build();
     }
 }
