@@ -37,8 +37,8 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void delete(Long id) {
-        projectDAO.delete(id);
+    public void delete(Project project) {
+        projectDAO.delete(project);
     }
 
     @Override

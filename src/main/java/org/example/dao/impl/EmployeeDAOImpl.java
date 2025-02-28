@@ -3,6 +3,7 @@ package org.example.dao.impl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.dao.EmployeeDAO;
+import org.example.listeners.EmployeeListener;
 import org.example.models.Employee;
 import org.example.utils.DatabaseConnection;
 
@@ -14,6 +15,7 @@ import java.util.Optional;
 public class EmployeeDAOImpl implements EmployeeDAO {
     private static final Logger logger = LogManager.getLogger(EmployeeDAOImpl.class);
     private final Connection connection;
+    private static final List<EmployeeListener> LISTENERS = new ArrayList<>();
 
     public EmployeeDAOImpl() {
         this.connection = DatabaseConnection.getInstance().getConnection();
@@ -31,8 +33,19 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             stmt.setDouble(4, employee.getSalary());
             stmt.setString(5, employee.getSkills());
             stmt.executeUpdate();
+
+            // Notify listeners first
+            for (EmployeeListener listener : LISTENERS) {
+                listener.onInsert(employee);
+            }
+
+            // Log success only if both DB insert and listeners worked
+            logger.info("Employee inserted and listeners notified successfully.");
+
         } catch (SQLException e) {
             logger.error("Error inserting employee: {}", employee, e);
+        } catch (Exception e) {
+            logger.error("Error notifying listeners for employee: {}", employee.getId(), e);
         }
     }
 
@@ -149,8 +162,17 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             stmt.setString(5, employee.getSkills());
             stmt.setLong(6, employee.getId());
             stmt.executeUpdate();
+
+            for (EmployeeListener listener : LISTENERS) {
+                listener.onUpdate(employee);
+            }
+
+            logger.info("Employee updated and listeners notified successfully.");
+
         } catch (SQLException e) {
             logger.error("Error updating employee with ID {}", employee.getId(), e);
+        } catch (Exception e) {
+            logger.error("Error notifying listeners for employee: {}", employee.getId(), e);
         }
     }
 
@@ -168,13 +190,22 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     // 5. Two Delete operations
     @Override
-    public void delete(Long id) {
+    public void delete(Employee employee) {
         String sql = "DELETE FROM employees WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setLong(1, id);
+            stmt.setLong(1, employee.getId());
             stmt.executeUpdate();
+
+            for (EmployeeListener listener : LISTENERS) {
+                listener.onDelete(employee.getId());
+            }
+
+            logger.info("Employee deleted and listeners notified successfully.");
+
         } catch (SQLException e) {
-            logger.error("Error deleting employee with ID {}", id, e);
+            logger.error("Error deleting employee with ID {}", employee.getId(), e);
+        } catch (Exception e) {
+            logger.error("Error notifying listeners for employee: {}", employee.getId(), e);
         }
     }
 

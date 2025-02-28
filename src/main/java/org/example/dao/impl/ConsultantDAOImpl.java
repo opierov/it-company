@@ -3,6 +3,7 @@ package org.example.dao.impl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.dao.ConsultantDAO;
+import org.example.listeners.ConsultantListener;
 import org.example.models.Consultant;
 import org.example.models.Manager;
 import org.example.utils.DatabaseConnection;
@@ -15,6 +16,7 @@ import java.util.Optional;
 public class ConsultantDAOImpl implements ConsultantDAO {
     private static final Logger logger = LogManager.getLogger(ConsultantDAOImpl.class);
     private final Connection connection;
+    private final List<ConsultantListener> LISTENERS = new ArrayList<>();
 
     public ConsultantDAOImpl() {
         this.connection = DatabaseConnection.getInstance().getConnection();
@@ -33,7 +35,18 @@ public class ConsultantDAOImpl implements ConsultantDAO {
             stmt.setLong(5, consultant.getManagerId());
             stmt.setLong(6, consultant.getId());
             stmt.executeUpdate();
-            logger.info("Consultant inserted successfully.");
+
+            // Logs DB insert success, even if listeners fail
+            logger.info("Consultant inserted {}", consultant);
+
+            // Notify listeners second
+            try {
+                ConsultantListener.notifyListeners(LISTENERS, "insert", consultant, consultant.getId());
+                logger.info("Listeners notified successfully.");
+            } catch (Exception e) {
+                logger.error("Error notifying listeners for consultant: {}", consultant.getId(), e);
+            }
+
         } catch (SQLException e) {
             logger.error("Error inserting consultant", e);
         }
@@ -154,9 +167,18 @@ public class ConsultantDAOImpl implements ConsultantDAO {
             stmt.setLong(5, consultant.getManagerId());
             stmt.executeUpdate();
             logger.info("Consultant updated successfully: {}", consultant.getId());
+
+            try {
+                ConsultantListener.notifyListeners(LISTENERS, "update", consultant, consultant.getId());
+                logger.info("Listeners notified successfully");
+            } catch (Exception e) {
+                logger.error("Error notifying listeners for consultant: {}", consultant.getId(), e);
+            }
+
         } catch (SQLException e) {
             logger.error("Error updating consultant", e);
         }
+
     }
 
     @Override
@@ -187,12 +209,20 @@ public class ConsultantDAOImpl implements ConsultantDAO {
 
     // 5. Two Delete operations
     @Override
-    public void delete(Long id) {
+    public void delete(Consultant consultant) {
         String sql = "DELETE FROM consultants WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setLong(1, id);
+            stmt.setLong(1, consultant.getId());
             stmt.executeUpdate();
             logger.info("Consultant deleted successfully.");
+
+            try {
+                ConsultantListener.notifyListeners(LISTENERS, "delete", consultant, consultant.getId());
+                logger.info("Listeners notified successfully!");
+            } catch (Exception e) {
+                logger.error("Error notifying listeners for consultant: {}", consultant.getId(), e);
+            }
+
         } catch (SQLException e) {
             logger.error("Error deleting consultant", e);
         }

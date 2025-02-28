@@ -173,12 +173,12 @@ public class ClientDAOImpl implements ClientDAO {
 
     // 5. Two Delete operations
     @Override
-    public void delete(Long id) {
+    public void delete(Client client) {
         String sql = "DELETE FROM clients WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setLong(1, id);
+            stmt.setLong(1, client.getId());
             stmt.executeUpdate();
-            logger.info("Client deleted successfully with ID: {}", id);
+            logger.info("Client deleted successfully with ID: {}", client.getId());
         } catch (SQLException e) {
             logger.error("Error deleting client", e);
         }

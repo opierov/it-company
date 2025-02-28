@@ -170,12 +170,12 @@ public class ManagerDAOImpl implements ManagerDAO {
 
     // 5. Two Delete operations
     @Override
-    public void delete(Long id) {
+    public void delete(Manager manager) {
         String sql = "DELETE FROM managers WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setLong(1, id);
+            stmt.setLong(1, manager.getId());
             stmt.executeUpdate();
-            logger.info("Manager deleted with ID: {}", id);
+            logger.info("Manager deleted with ID: {}", manager);
         } catch (SQLException e) {
             logger.error("Error deleting manager", e);
         }

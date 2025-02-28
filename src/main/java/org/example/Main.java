@@ -45,7 +45,7 @@ public class Main {
         logger.info("Client contact info updated.");;
 
         // 6. Remove client by ID
-        clientService.delete(1L);
+        clientService.delete(client);
         logger.info("Client removed.");
 
         // Using CONSULTANT
@@ -65,7 +65,7 @@ public class Main {
         consultantService.updateConsultantSalary(1L, 6000D);
 
         // Delete consultant by ID
-        consultantService.delete(1L);
+        consultantService.delete(consultant);
 
         // USING EMPLOYEE
         // 1. Create a new employee
@@ -102,7 +102,7 @@ public class Main {
 
         // 5. Delete an employee
         retrievedEmployee.ifPresent(employee -> {
-            employeeService.delete(employee.getId());
+            employeeService.delete(employee);
             logger.info("Deleted Employee with ID: {}", employee.getId());
         });
 
@@ -141,7 +141,7 @@ public class Main {
         logger.info("Manager salary updated.");
 
         // 9. Remove manager
-        managerService.delete(1L);
+        managerService.delete(manager);
         logger.info("Manager removed.");
 
         // 10. Remove managers by industry
@@ -184,7 +184,7 @@ public class Main {
         logger.info("Updated Project Technology.");
 
         // 6. Delete a project
-        projectService.delete(newProject.getId());
+        projectService.delete(newProject);
         logger.info("Deleted Project with ID: {}", newProject.getId());
 
         // 7. Delete projects by technology

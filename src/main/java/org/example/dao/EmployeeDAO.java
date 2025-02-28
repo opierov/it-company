@@ -14,4 +14,5 @@ public interface EmployeeDAO extends BaseDAO<Employee> {
     void updateSkills(Long id, String skills);
 
     void deleteBySalaryRange(Double minSalary, Double maxSalary);
+
 }

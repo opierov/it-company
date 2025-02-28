@@ -37,8 +37,8 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void delete(Long id) {
-        clientDAO.delete(id);
+    public void delete(Client client) {
+        clientDAO.delete(client);
     }
 
     @Override

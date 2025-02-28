@@ -63,7 +63,7 @@ public class ProjectDAOImpl implements ProjectDAO {
                 projects.add(project);
             }
         } catch (SQLException e) {
-            logger.error("Error fetching project with client and manager", e);
+            logger.error("Error retrieving project with client and manager", e);
         }
 
         return projects;
@@ -79,7 +79,7 @@ public class ProjectDAOImpl implements ProjectDAO {
                 projects.add(mapToProject(rs));
             }
         } catch (SQLException e) {
-            logger.error("Error fetching all projects: ", e);
+            logger.error("Error retrieving all projects: ", e);
         }
         return projects;
     }
@@ -94,7 +94,7 @@ public class ProjectDAOImpl implements ProjectDAO {
                 return Optional.of(mapToProject(rs));
             }
         } catch (SQLException e) {
-            logger.error("Error fetching project by id", e);
+            logger.error("Error retrieving project by id", e);
         }
         return Optional.empty();
     }
@@ -110,7 +110,7 @@ public class ProjectDAOImpl implements ProjectDAO {
                 projects.add(mapToProject(rs));
             }
         } catch (SQLException e) {
-            logger.error("Error fetching projects by technology: ", e);
+            logger.error("Error retrieving projects by technology: ", e);
         }
         return projects;
     }
@@ -127,7 +127,7 @@ public class ProjectDAOImpl implements ProjectDAO {
                 projects.add(mapToProject(rs));
             }
         } catch (SQLException e) {
-            logger.error("Error fetching projects by budget range: ", e);
+            logger.error("Error retrieving projects by budget range: ", e);
         }
         return projects;
     }
@@ -143,7 +143,7 @@ public class ProjectDAOImpl implements ProjectDAO {
                 projects.add(mapToProject(rs));
             }
         } catch (SQLException e) {
-            logger.error("Error fetching projects by deadline: ", e);
+            logger.error("Error retrieving projects by deadline: ", e);
         }
         return projects;
     }
@@ -159,7 +159,7 @@ public class ProjectDAOImpl implements ProjectDAO {
                 projects.add(mapToProject(rs));
             }
         } catch (SQLException e) {
-            logger.error("Error fetching projects by name: ", e);
+            logger.error("Error retrieving projects by name: ", e);
         }
         return projects;
     }
@@ -176,6 +176,7 @@ public class ProjectDAOImpl implements ProjectDAO {
             stmt.setString(4, project.getTechnology());
             stmt.setLong(5, project.getId());
             stmt.executeUpdate();
+
         } catch (SQLException e) {
             logger.error("Error updating project with ID {}", project.getId(), e);
         }
@@ -207,11 +208,12 @@ public class ProjectDAOImpl implements ProjectDAO {
 
     // 5. Two Delete operations
     @Override
-    public void delete(Long id) {
+    public void delete(Project project) {
         String sql = "DELETE FROM projects WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setLong(1, id);
+            stmt.setLong(1, project.getId());
             stmt.executeUpdate();
+
         } catch (SQLException e) {
             logger.error("Error deleting project: ", e);
         }
@@ -235,7 +237,6 @@ public class ProjectDAOImpl implements ProjectDAO {
         project.setDeadline(rs.getString("deadline"));
         project.setBudget(rs.getDouble("budget"));
         project.setTechnology(rs.getString("technology"));
-
         return project;
     }
 

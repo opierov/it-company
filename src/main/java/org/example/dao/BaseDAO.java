@@ -8,6 +8,6 @@ public interface BaseDAO<T> {
     Optional<T> getById(Long id);
     List<T> getAll();
     void update(T entity);
-    void delete(Long id);
+    void delete(T entity);
 
 }

@@ -37,8 +37,8 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
-    public void delete(Long id) {
-        managerDAO.delete(id);
+    public void delete(Manager manager) {
+        managerDAO.delete(manager);
     }
 
     @Override

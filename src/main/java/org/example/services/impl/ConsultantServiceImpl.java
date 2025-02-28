@@ -37,8 +37,8 @@ public class ConsultantServiceImpl implements ConsultantService {
     }
 
     @Override
-    public void delete(Long id) {
-        consultantDAO.delete(id);
+    public void delete(Consultant consultant) {
+        consultantDAO.delete(consultant);
     }
 
     @Override
